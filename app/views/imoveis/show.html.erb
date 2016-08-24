@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Tipo:</strong>
+  <%= @imovel.tipo %>
+</p>
+
+<p>
+  <strong>Logradouro:</strong>
+  <%= @imovel.logradouro %>
+</p>
+
+<p>
+  <strong>Numero:</strong>
+  <%= @imovel.numero %>
+</p>
+
+<p>
+  <strong>Bairro:</strong>
+  <%= @imovel.bairro %>
+</p>
+
+<p>
+  <strong>Cidade:</strong>
+  <%= @imovel.cidade %>
+</p>
+
+<%= link_to 'Edit', edit_imovel_path(@imovel) %> |
+<%= link_to 'Back', imoveis_path %>

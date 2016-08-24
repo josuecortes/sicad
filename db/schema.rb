@@ -11,10 +11,59 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160824185804) do
+ActiveRecord::Schema.define(version: 20160824200459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "agendas", force: :cascade do |t|
+    t.string   "data"
+    t.string   "hora"
+    t.string   "responsavel"
+    t.string   "contato"
+    t.string   "endereco"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "entidades", force: :cascade do |t|
+    t.string   "nome"
+    t.date     "data_criacao"
+    t.string   "codigo"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "imoveis", force: :cascade do |t|
+    t.string   "tipo"
+    t.string   "logradouro"
+    t.string   "numero"
+    t.string   "bairro"
+    t.string   "cidade"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pessoas", force: :cascade do |t|
+    t.string   "nome"
+    t.date     "nascimento"
+    t.string   "sexo"
+    t.string   "rg"
+    t.string   "cpf"
+    t.string   "titulo"
+    t.string   "zona"
+    t.string   "secao"
+    t.string   "logradouro"
+    t.string   "numero"
+    t.string   "bairro"
+    t.string   "cidade"
+    t.string   "contato"
+    t.string   "email"
+    t.integer  "entidade_id"
+    t.integer  "usuario_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -30,9 +79,22 @@ ActiveRecord::Schema.define(version: 20160824185804) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "name"
+    t.string   "cpf"
+    t.integer  "superior_id"
+    t.integer  "entidade_id"
+    t.string   "tipo"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "veiculos", force: :cascade do |t|
+    t.string   "tipo"
+    t.string   "placa"
+    t.string   "proprietario"
+    t.string   "contato"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
 end

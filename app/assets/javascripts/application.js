@@ -16,15 +16,6 @@
 //= require jquery-ui/autocomplete
 //= require autocomplete-rails
 //= require bootstrap
-//= require bootstrap.min
 //= require excanvas.min
-//= require flot-data
-//= require jquery.flot
-//= require jquery.flot.pie
-//= require jquery.flot.resize
-//= require jquery.flot.tooltip.min
-//= require morris-data
-//= require morris.min
-//= require morris
 //= require raphael.min 
 

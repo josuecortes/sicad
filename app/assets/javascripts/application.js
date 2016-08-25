@@ -2,7 +2,7 @@
 // listed below.
 //
 // Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
-// or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
+// or any plugin's vendor/assets/javascripts directory can be referenced here using a relative path.
 //
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // compiled file.
@@ -12,5 +12,19 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap-sprockets
-//= require_tree .
+//= require jquery-ui
+//= require jquery-ui/autocomplete
+//= require autocomplete-rails
+//= require bootstrap
+//= require bootstrap.min
+//= require excanvas.min
+//= require flot-data
+//= require jquery.flot
+//= require jquery.flot.pie
+//= require jquery.flot.resize
+//= require jquery.flot.tooltip.min
+//= require morris-data
+//= require morris.min
+//= require morris
+//= require raphael.min 
+

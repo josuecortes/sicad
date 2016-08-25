@@ -1,6 +1,11 @@
-<h1>Editing Entidade</h1>
+<% content_for :titulo do %>
+  Entidades
+<% end %>
+
+<% content_for :sub_titulo do %>
+  <p>
+  	Editar Entidade
+  </p>
+<% end %>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @entidade %> |
-<%= link_to 'Back', entidades_path %>

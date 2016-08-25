@@ -2,22 +2,33 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :nome %>
-    <%= f.input :nascimento %>
-    <%= f.input :sexo %>
-    <%= f.input :rg %>
-    <%= f.input :cpf %>
-    <%= f.input :titulo %>
-    <%= f.input :zona %>
-    <%= f.input :secao %>
-    <%= f.input :logradouro %>
-    <%= f.input :numero %>
-    <%= f.input :bairro %>
-    <%= f.input :cidade %>
-    <%= f.input :contato %>
-    <%= f.input :email %>
-    <%= f.input :entidade_id %>
-    <%= f.input :usuario_id %>
+
+    <div class="row">
+      
+      <div class="col-lg-6">
+        <%= f.input :nome %>
+        <%= f.input :nascimento %>
+        <%= f.input :sexo %>
+        <%= f.input :rg %>
+        <%= f.input :cpf %>
+        <%= f.input :titulo %>
+        <%= f.input :zona %>
+        <%= f.input :secao %>
+      </div>
+
+      <div class="col-lg-6">
+        <%= f.input :logradouro %>
+        <%= f.input :numero %>
+        <%= f.input :bairro %>
+        <%= f.input :cidade %>
+        <%= f.input :contato %>
+        <%= f.input :email %>
+        <%= f.input :entidade_id %>
+        <%= f.input :usuario_id %>
+      </div>
+
+    </div>
+
   </div>
 
   <div class="form-actions">

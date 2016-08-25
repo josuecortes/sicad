@@ -1,6 +1,11 @@
-<h1>Editing Pessoa</h1>
+<% content_for :titulo do %>
+  Pessoas
+<% end %>
+
+<% content_for :sub_titulo do %>
+  <p>
+  	Editar Pessoa
+  </p>
+<% end %>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @pessoa %> |
-<%= link_to 'Back', pessoas_path %>

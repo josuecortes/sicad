@@ -1,14 +1,23 @@
-<p id="notice"><%= notice %></p>
+<% content_for :titulo do %>
+  Entidades
+<% end %>
 
-<h1>Listing Entidades</h1>
+<% content_for :sub_titulo do %>
+  <ul class="list-inline pull-right">
+    <%= link_to link_icone2('nova','Adicionar'), new_entidade_path, :class=> 'btn btn-success', :title=>"Nova Entidade" %>
+  </ul>
+  <p>
+    Lista de Entidades
+  </p>
+<% end %>
 
-<table>
+<table id="entidades" class="display" cellspacing="0" width="100%">
   <thead>
     <tr>
       <th>Nome</th>
       <th>Data criacao</th>
       <th>Codigo</th>
-      <th colspan="3"></th>
+      <th>Ações</th>
     </tr>
   </thead>
 
@@ -18,14 +27,15 @@
         <td><%= entidade.nome %></td>
         <td><%= entidade.data_criacao %></td>
         <td><%= entidade.codigo %></td>
-        <td><%= link_to 'Show', entidade %></td>
-        <td><%= link_to 'Edit', edit_entidade_path(entidade) %></td>
-        <td><%= link_to 'Destroy', entidade, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to link_icone('detalhes'), entidade, :class => 'btn btn-default' %>
+          <%= link_to link_icone('editar'), edit_entidade_path(entidade), :class => 'btn btn-primary' %>
+          <%= link_to link_icone('apagar'), entidade, method: :delete, data: { confirm: 'Você esta certo disso?' }, :class => 'btn btn-danger' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
+<br/>
 
-<%= link_to 'New Entidade', new_entidade_path %>

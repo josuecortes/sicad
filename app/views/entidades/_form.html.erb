@@ -6,11 +6,11 @@
 
     <div class="row">
       
-      <div class="col-lg-6">
+      <div class="col-lg-4">
         <%= f.input :data_criacao %>
       </div>
 
-      <div class="col-lg-6">
+      <div class="col-lg-8">
         <%= f.input :codigo %>
       </div>
 
@@ -18,7 +18,13 @@
    
   </div>
 
+  <br/>
+
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= link_to 'Voltar', entidades_path, :class=>'btn btn-default' %>
+    <%= f.button :submit, :class=>"btn btn-primary" %>
   </div>
+
+  <br/>
+
 <% end %>

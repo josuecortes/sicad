@@ -1,0 +1,82 @@
+<% content_for :titulo do %>
+  Usuários
+<% end %>
+
+<% content_for :sub_titulo do %>
+  <p>
+    Novo Usuário
+  </p>
+<% end %>
+
+<%= simple_form_for @usuario, :url=>usuarios_path do |f| %>
+
+	<div class="row">
+      
+    <div class="col-lg-9">
+      <%= f.input :name, :label=>"Nome" %>
+    </div>  
+
+    <div class="col-lg-3">
+      <%= f.input :cpf, :label=>"CPF", :input_html=>{:class=>'cpf'} %>
+    </div>
+
+  </div>
+
+  <div class="row">
+      
+    <div class="col-lg-9">
+      <%= f.input :email %>
+    </div>  
+
+    <div class="col-lg-3">
+      <% @master = ['MASTER', 'ADMINISTRADOR'] %>
+      <% @administrador = ['ADMINISTRADOR', 'USUARIO'] %>
+      <% @usuario = ['USUARIO'] %>
+
+      <% if current_user.tipo == "MASTER" %>
+        <%= f.input :tipo, :label=>"Tipo", collection: @master, as: :select, :include_blank => false %>
+      <% elsif current_user.tipo == "ADMINISTRADOR" %>
+        <%= f.input :tipo, :label=>"Tipo", collection: @administrador, as: :select, :include_blank => false %>
+        <%= f.input :entidade_id, as: :hidden, :input_html=>{:value=>current_user.entidade_id} %>
+      <% else %>
+        <%= f.input :tipo, :label=>"Tipo", collection: @usuario, as: :select, :include_blank => false %>
+        <%= f.input :entidade_id, as: :hidden, :input_html=>{:value=>current_user.entidade_id} %>
+      <% end %>
+    </div>
+
+  </div>  
+
+  <div class="row">
+      
+    <div class="col-lg-6">
+      <% if current_user.tipo == "USUARIO" or current_user.tipo == "ADMINISTRADOR" %>
+        <%= f.input :superior_id, :label=>"Superior", :collection=>User.da_entidade(current_user.entidade_id).order('name ASC').collect {|u| [u.name, u.id]}, as: :select, :input_html => {:class=>"col-xs-2", :required=>true}  %>
+      <% end %>
+    </div>  
+
+    <div class="col-lg-6">
+      <% if current_user.tipo == "MASTER" %>
+        <%= f.input :entidade_id, :label=>"Entidade", :collection=>Entidade.order('nome ASC').collect {|e| [e.nome, e.id]}, as: :select, :input_html => {:class=>"col-xs-2", :required=>true}  %>
+      <% end %>
+    </div>
+
+  </div>
+
+  <br/>
+
+  <p class="text-danger">Atenção: A senha gerada sera: "12345678"</p>
+  <p class="text-info">Apos o primeiro login o usuário sera redirecionado e solicitado a mudar sua senha.
+
+  <%= f.input :password, :as => :hidden, :input_html => {value: "12345678"} %>
+  <%= f.input :password_confirmation, :as => :hidden, :input_html => {value: "12345678"} %>
+    
+  <br/>
+
+  <div class="form-actions">
+    <%= link_to 'Voltar', usuarios_path, :class=>'btn btn-default' %>
+    <%= f.button :submit, 'Salvar', :class=>'btn btn-primary' %>
+  </div>
+
+  <br/>
+
+<% end %>

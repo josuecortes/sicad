@@ -1,4 +1,11 @@
-<p id="notice"><%= notice %></p>
+<% content_for :titulo do %>
+  Entidades
+<% end %>
+
+<% content_for :sub_titulo do %>
+  Detalhes da Entidade
+<% end %>
+
 
 <p>
   <strong>Nome:</strong>
@@ -15,5 +22,10 @@
   <%= @entidade.codigo %>
 </p>
 
-<%= link_to 'Edit', edit_entidade_path(@entidade) %> |
-<%= link_to 'Back', entidades_path %>
+<br/>
+
+<%= link_to link_icone('voltar'), entidades_path, :class=>'btn btn-default', :title=>"Voltar" %> 
+<%= link_to link_icone('editar'), edit_entidade_path(@entidade), :class=>"btn btn-primary", :title=>"Editar" %> 
+<%= link_to link_icone('novo'), new_entidade_path, :class=> 'btn btn-success', :title=>"Nova Entidade" %>
+
+<br/>

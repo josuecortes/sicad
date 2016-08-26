@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   resources :imoveis
   resources :entidades
   resources :pessoas
+
+  resources :usuarios do
+    get :redefinir_senha
+  end
+
   devise_for :users
 
   devise_scope :user do

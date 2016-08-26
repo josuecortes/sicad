@@ -7,31 +7,89 @@
       
       <div class="col-lg-6">
         <%= f.input :nome %>
-        <%= f.input :nascimento %>
-        <%= f.input :sexo %>
-        <%= f.input :rg %>
-        <%= f.input :cpf %>
+        
+        <div class="row">
+          <div class="col-lg-8">
+            <%= f.input :nascimento %>
+          </div>
+          <div class="col-lg-4">
+            <%= f.input :sexo %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-7">
+            <%= f.input :cpf, :input_html=>{:class=>'cpf', :id=>'cpf'} %>
+          </div>
+          <div class="col-lg-5">
+            <%= f.input :rg %>
+          </div>
+        </div>
+
         <%= f.input :titulo %>
-        <%= f.input :zona %>
-        <%= f.input :secao %>
+        <div class="row">
+          <div class="col-lg-5">
+            <%= f.input :zona %>
+          </div>
+          <div class="col-lg-7">
+            <%= f.input :secao %>
+          </div>
+        </div>
+        
       </div>
 
       <div class="col-lg-6">
-        <%= f.input :logradouro %>
-        <%= f.input :numero %>
-        <%= f.input :bairro %>
-        <%= f.input :cidade %>
-        <%= f.input :contato %>
-        <%= f.input :email %>
-        <%= f.input :entidade_id %>
-        <%= f.input :usuario_id %>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <%= f.input :cidade %>
+          </div>
+          <div class="col-lg-6">
+            <%= f.input :bairro %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-10">
+            <%= f.input :logradouro %>
+          </div>
+          <div class="col-lg-2">
+            <%= f.input :numero %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-8">
+            <%= f.input :email %>
+          </div>
+          <div class="col-lg-4">
+            <%= f.input :contato, :input_html=>{:class=>'phone'} %>
+          </div>
+        </div>
+        
+        <% if current_user.tipo != "MASTER" %>
+          <%= f.input :entidade_id, as: :hidden, :input_html=>{:value=>current_user.entidade_id} %>
+        <% end %>
+        
+        <% if current_user.tipo == "USUARIO" %>
+          <%= f.input :user_id, as: :hidden, :input_html=>{:value=>current_user.id} %>
+        <% elsif current_user != "MASTER" %>
+
+        <% end %>
+        
       </div>
 
     </div>
 
   </div>
 
+  <br/>
+
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= link_to 'Voltar', pessoas_path, :class=>'btn btn-default' %>
+    <%= f.button :submit, :class=>"btn btn-primary" %>
   </div>
+
+  <br/>
+
 <% end %>

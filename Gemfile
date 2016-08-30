@@ -37,3 +37,6 @@ gem "font-awesome-rails"
 gem 'cancancan'
 
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
+
+gem 'geocoder'
+gem 'gmaps4rails'

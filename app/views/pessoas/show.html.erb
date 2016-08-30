@@ -119,7 +119,7 @@
     lng: <%= @pessoa.longitude %>,
     click: function(e) {
       alert(
-        "NOME: <%= @pessoa.nome %>"
+        "NOME: <%= @pessoa.nome %> \nENDEREÇO: <%= @pessoa.logradouro %>, <%= @pessoa.numero %>, <%= @pessoa.bairro.nome %>"
         );
     }
   });

@@ -47,7 +47,9 @@ class Pessoa < ActiveRecord::Base
   after_validation :endereco
 
   def endereco
-    self.address = "#{self.bairro.cidade.nome}, #{self.logradouro}, #{self.numero}"
+    if !self.bairro.blank?
+      self.address = "#{self.bairro.cidade.nome}, #{self.logradouro}, #{self.numero}"
+    end
   end
 
   geocoded_by :address

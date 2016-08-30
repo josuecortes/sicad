@@ -6,7 +6,13 @@
     <%= f.input :numero_total %>
   </div>
 
+  <br/>
+
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= link_to 'Voltar', cidades_path, :class=>'btn btn-default' %>
+    <%= f.button :submit, :class=>"btn btn-primary" %>
   </div>
+
+  <br/>
+
 <% end %>

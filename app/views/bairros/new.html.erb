@@ -1,5 +1,11 @@
-<h1>New Bairro</h1>
+<% content_for :titulo do %>
+  Bairros
+<% end %>
+
+<% content_for :sub_titulo do %>
+  <p>
+  	Novo Bairro
+  </p>
+<% end %>
 
 <%= render 'form' %>
-
-<%= link_to 'Back', bairros_path %>

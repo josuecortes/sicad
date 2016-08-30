@@ -40,12 +40,11 @@
 
       <div class="col-lg-6">
 
+      <% @lista_bairros = current_user.entidade.cidade.bairros.order("nome ASC") %>
+
         <div class="row">
-          <div class="col-lg-6">
-            <%= f.input :cidade %>
-          </div>
-          <div class="col-lg-6">
-            <%= f.input :bairro %>
+          <div class="col-lg-12">
+            <%= f.input :bairro_id, :collection=>current_user.entidade.cidade.bairros.order("nome ASC").collect {|b| [b.nome, b.id]}, as: :select %>
           </div>
         </div>
 

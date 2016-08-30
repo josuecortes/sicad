@@ -2,9 +2,9 @@ class Pessoa < ActiveRecord::Base
 
 	belongs_to :entidade
 	belongs_to :user
-  belongs_to :cidade
+  belongs_to :bairro
 
-	validates_presence_of :nome, :logradouro, :bairro, :sexo, :entidade_id, :user_id, :cidade_id, :numero
+	validates_presence_of :nome, :logradouro, :bairro_id, :sexo, :entidade_id, :user_id, :numero
 	validates_uniqueness_of :cpf, :if => :checar_cpf
 	validates_uniqueness_of :rg, :if => :checar_rg
 	validates_uniqueness_of :titulo, :if => :checar_titulo

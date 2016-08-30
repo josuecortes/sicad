@@ -17,6 +17,7 @@
       <th>Nome</th>
       <th>Data criacao</th>
       <th>Codigo</th>
+      <th>Cidade</th>
       <th>Ações</th>
     </tr>
   </thead>
@@ -27,6 +28,7 @@
         <td><%= entidade.nome %></td>
         <td><%= entidade.data_criacao %></td>
         <td><%= entidade.codigo %></td>
+        <td><%= detalhes2(entidade.cidade, :nome) %></td>
         <td>
           <%= link_to link_icone('detalhes'), entidade, :class => 'btn btn-default' %>
           <%= link_to link_icone('editar'), edit_entidade_path(entidade), :class => 'btn btn-primary' %>

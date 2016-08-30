@@ -1,6 +1,11 @@
-<h1>Editing Cidade</h1>
+<% content_for :titulo do %>
+  Cidades
+<% end %>
+
+<% content_for :sub_titulo do %>
+  <p>
+  	Editar Cidade
+  </p>
+<% end %>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @cidade %> |
-<%= link_to 'Back', cidades_path %>

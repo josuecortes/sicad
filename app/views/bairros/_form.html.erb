@@ -3,10 +3,16 @@
 
   <div class="form-inputs">
     <%= f.input :nome %>
-    <%= f.input :cidade_id %>
+    <%= f.input :cidade_id, :collection=>Cidade.order("nome ASC").collect {|c| [c.nome, c.id]}, as: :select %>
   </div>
 
+  <br/>
+
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= link_to 'Voltar', bairros_path, :class=>'btn btn-default' %>
+    <%= f.button :submit, :class=>"btn btn-primary" %>
   </div>
+
+  <br/>
+
 <% end %>

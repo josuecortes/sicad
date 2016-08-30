@@ -1,4 +1,10 @@
-<p id="notice"><%= notice %></p>
+<% content_for :titulo do %>
+  Bairros
+<% end %>
+
+<% content_for :sub_titulo do %>
+  Detalhes do Bairro
+<% end %>
 
 <p>
   <strong>Nome:</strong>
@@ -7,8 +13,13 @@
 
 <p>
   <strong>Cidade:</strong>
-  <%= @bairro.cidade_id %>
+  <%= detalhes2(@bairro.cidade, :nome) %>
 </p>
 
-<%= link_to 'Edit', edit_bairro_path(@bairro) %> |
-<%= link_to 'Back', bairros_path %>
+<br/>
+
+<%= link_to link_icone('voltar'), bairros_path, :class=>'btn btn-default', :title=>"Voltar" %> 
+<%= link_to link_icone('editar'), edit_bairro_path(@bairro), :class=>"btn btn-primary", :title=>"Editar" %> 
+<%= link_to link_icone('novo'), new_bairro_path, :class=> 'btn btn-success', :title=>"Novo bairro" %>
+
+<br/>

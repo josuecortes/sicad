@@ -1,4 +1,10 @@
-<p id="notice"><%= notice %></p>
+<% content_for :titulo do %>
+  Pessoas
+<% end %>
+
+<% content_for :sub_titulo do %>
+  Detalhes da Pessoa
+<% end %>
 
 <p>
   <strong>Nome:</strong>
@@ -17,27 +23,27 @@
 
 <p>
   <strong>Rg:</strong>
-  <%= @pessoa.rg %>
+  <%= detalhes(@pessoa.rg) %>
 </p>
 
 <p>
   <strong>Cpf:</strong>
-  <%= @pessoa.cpf %>
+  <%= detalhes(@pessoa.cpf) %>
 </p>
 
 <p>
   <strong>Titulo:</strong>
-  <%= @pessoa.titulo %>
+  <%= detalhes(@pessoa.titulo) %>
 </p>
 
 <p>
   <strong>Zona:</strong>
-  <%= @pessoa.zona %>
+  <%= detalhes(@pessoa.zona) %>
 </p>
 
 <p>
   <strong>Secao:</strong>
-  <%= @pessoa.secao %>
+  <%= detalhes(@pessoa.secao) %>
 </p>
 
 <p>
@@ -52,33 +58,34 @@
 
 <p>
   <strong>Bairro:</strong>
-  <%= @pessoa.bairro %>
+  <%= detalhes2(@pessoa.bairro, :nome) %>
 </p>
 
 <p>
   <strong>Cidade:</strong>
-  <%= @pessoa.cidade %>
+  <%= detalhes2(@pessoa.bairro.cidade, :nome) %>
 </p>
 
 <p>
   <strong>Contato:</strong>
-  <%= @pessoa.contato %>
+  <%= detalhes(@pessoa.contato) %>
 </p>
 
 <p>
   <strong>Email:</strong>
-  <%= @pessoa.email %>
+  <%= detalhes(@pessoa.email) %>
 </p>
+
 
 <p>
-  <strong>Entidade:</strong>
-  <%= @pessoa.entidade_id %>
+  <strong>Superior:</strong>
+  <%= detalhes2(@pessoa.user, :name) %>
 </p>
 
-<p>
-  <strong>Usuario:</strong>
-  <%= @pessoa.usuario_id %>
-</p>
+<br/>
 
-<%= link_to 'Edit', edit_pessoa_path(@pessoa) %> |
-<%= link_to 'Back', pessoas_path %>
+<%= link_to link_icone('voltar'), pessoas_path, :class=>'btn btn-default', :title=>"Voltar" %> 
+<%= link_to link_icone('editar'), edit_pessoa_path(@pessoa), :class=>"btn btn-primary", :title=>"Editar" %> 
+<%= link_to link_icone('novo'), new_pessoa_path, :class=> 'btn btn-success', :title=>"Nova pessoa" %>
+
+<br/>

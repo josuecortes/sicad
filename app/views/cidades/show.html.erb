@@ -1,5 +1,10 @@
-<p id="notice"><%= notice %></p>
+<% content_for :titulo do %>
+  Cidades
+<% end %>
 
+<% content_for :sub_titulo do %>
+  Detalhes da Cidade
+<% end %>
 <p>
   <strong>Nome:</strong>
   <%= @cidade.nome %>
@@ -10,5 +15,10 @@
   <%= @cidade.numero_total %>
 </p>
 
-<%= link_to 'Edit', edit_cidade_path(@cidade) %> |
-<%= link_to 'Back', cidades_path %>
+<br/>
+
+<%= link_to link_icone('voltar'), cidades_path, :class=>'btn btn-default', :title=>"Voltar" %> 
+<%= link_to link_icone('editar'), edit_cidade_path(@cidade), :class=>"btn btn-primary", :title=>"Editar" %> 
+<%= link_to link_icone('novo'), new_cidade_path, :class=> 'btn btn-success', :title=>"Nova Cidade" %>
+
+<br/>

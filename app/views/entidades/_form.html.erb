@@ -2,18 +2,29 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :nome %>
-
+    
     <div class="row">
       
+      <div class="col-lg-8">
+        <%= f.input :nome %>
+      </div>
+
+      <div class="col-lg-4">
+        <%= f.input :codigo %>
+      </div>
+
+    </div>
+
+    <div class="row">
       <div class="col-lg-4">
         <%= f.input :data_criacao %>
       </div>
 
-      <div class="col-lg-8">
-        <%= f.input :codigo %>
-      </div>
+      <% @lista_cidades = Cidade.order("nome ASC").all %>
 
+      <div class="col-lg-8">
+        <%= f.input :cidade_id, :collection=>Cidade.order("nome ASC").collect {|c| [c.nome, c.id]}, as: :select %>
+      </div>
     </div>
    
   </div>

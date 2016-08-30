@@ -107,8 +107,7 @@ class UsuariosController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :cpf, :entidade_id, :superior_id, :tipo, :ativo, :mudar_senha, :email, :password, 
                                  :password_confirmation, :sign_in_count, :current_sign_in_at, 
-                                 :last_sign_in_at, :current_sign_in_ip, :last_sign_in_ip,
-                                 role_ids: [])
+                                 :last_sign_in_at, :current_sign_in_ip, :last_sign_in_ip)
   end
 
 end

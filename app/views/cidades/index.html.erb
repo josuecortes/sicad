@@ -1,13 +1,22 @@
-<p id="notice"><%= notice %></p>
+<% content_for :titulo do %>
+  Cidades
+<% end %>
 
-<h1>Listing Cidades</h1>
+<% content_for :sub_titulo do %>
+  <ul class="list-inline pull-right">
+    <%= link_to link_icone2('nova','Adicionar'), new_cidade_path, :class=> 'btn btn-success', :title=>"Nova Cidade" %>
+  </ul>
+  <p>
+    Lista de Cidades
+  </p>
+<% end %>
 
-<table>
+<table id="cidades" class="display" cellspacing="0" width="100%">
   <thead>
     <tr>
       <th>Nome</th>
       <th>Numero total</th>
-      <th colspan="3"></th>
+      <th>Ações</th>
     </tr>
   </thead>
 
@@ -16,9 +25,11 @@
       <tr>
         <td><%= cidade.nome %></td>
         <td><%= cidade.numero_total %></td>
-        <td><%= link_to 'Show', cidade %></td>
-        <td><%= link_to 'Edit', edit_cidade_path(cidade) %></td>
-        <td><%= link_to 'Destroy', cidade, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to link_icone('detalhes'), cidade, :class => 'btn btn-default' %>
+          <%= link_to link_icone('editar'), edit_cidade_path(cidade), :class => 'btn btn-primary' %>
+          <%= link_to link_icone('apagar'), cidade, method: :delete, data: { confirm: 'Você esta certo disso?' }, :class => 'btn btn-danger' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +37,3 @@
 
 <br>
 
-<%= link_to 'New Cidade', new_cidade_path %>

@@ -6,7 +6,9 @@ class Entidade < ActiveRecord::Base
 	has_many :pessoas, dependent: :restrict_with_error
 	has_many :veiculos, dependent: :restrict_with_error
 
-	validates_presence_of :nome, :data_criacao, :codigo
+	belongs_to :cidade
+
+	validates_presence_of :nome, :data_criacao, :codigo, :cidade_id
 	validates_uniqueness_of :nome, :codigo
 
 	before_save :maiusculas_sem_acentos

@@ -10,12 +10,14 @@ class User < ActiveRecord::Base
   scope :da_entidade, ->(ent) { where("entidade_id = ?", ent) }
 
   belongs_to :entidade
+  belongs_to :cidade
   belongs_to :superior, class_name: "User"
   has_many :pessoas, dependent: :restrict_with_error
 
   validates_presence_of :tipo, :name, :email
   validates_presence_of :entidade_id, :if => :checar_tipo
   validates_presence_of :superior_id, :if => :checar_tipo2
+  validates_presence_of :cidade_id, :if => :checar_tipo
 
   def checar_tipo
   	if self.tipo == "MASTER"

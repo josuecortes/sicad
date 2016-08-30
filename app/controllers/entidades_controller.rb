@@ -69,6 +69,6 @@ class EntidadesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def entidade_params
-      params.require(:entidade).permit(:nome, :data_criacao, :codigo)
+      params.require(:entidade).permit(:nome, :data_criacao, :codigo, :cidade_id)
     end
 end

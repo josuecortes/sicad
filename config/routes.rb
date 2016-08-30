@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :bairros
+  resources :cidades
   get 'home/index'
 
   get 'home/nao_autorizado'

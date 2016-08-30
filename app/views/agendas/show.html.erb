@@ -1,4 +1,11 @@
-<p id="notice"><%= notice %></p>
+<% content_for :titulo do %>
+  Agenda
+<% end %>
+
+<% content_for :sub_titulo do %>
+  Detalhes do Compromisso
+<% end %>
+
 
 <p>
   <strong>Data:</strong>
@@ -25,5 +32,9 @@
   <%= @agenda.endereco %>
 </p>
 
-<%= link_to 'Edit', edit_agenda_path(@agenda) %> |
-<%= link_to 'Back', agendas_path %>
+<br/>
+<%= link_to link_icone('voltar'), agendas_path, :class=>'btn btn-default', :title=>"Voltar" %> 
+<%= link_to link_icone('editar'), edit_agenda_path(@agenda), :class=>"btn btn-primary", :title=>"Editar" %> 
+<%= link_to link_icone('novo'), new_agenda_path, :class=> 'btn btn-success', :title=>"Novo Compromisso" %>
+
+<br/>

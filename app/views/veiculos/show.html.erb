@@ -1,24 +1,40 @@
-<p id="notice"><%= notice %></p>
+<% content_for :titulo do %>
+  Veículos
+<% end %>
+
+<% content_for :sub_titulo do %>
+  Detalhes do Veículo
+<% end %>
+
 
 <p>
   <strong>Tipo:</strong>
-  <%= @veiculo.tipo %>
+  <%= detalhes(@veiculo.tipo) %>
 </p>
 
 <p>
   <strong>Placa:</strong>
-  <%= @veiculo.placa %>
+  <%= detalhes(@veiculo.placa) %>
 </p>
 
 <p>
   <strong>Proprietario:</strong>
-  <%= @veiculo.proprietario %>
+  <%= detalhes(@veiculo.proprietario) %>
 </p>
 
 <p>
   <strong>Contato:</strong>
-  <%= @veiculo.contato %>
+  <%= detalhes(@veiculo.contato) %>
 </p>
 
-<%= link_to 'Edit', edit_veiculo_path(@veiculo) %> |
-<%= link_to 'Back', veiculos_path %>
+<p>
+  <strong>Usuário:</strong>
+  <%= detalhes2(@veiculo.user,:name) %>
+</p>
+<br/>
+
+<%= link_to link_icone('voltar'), veiculos_path, :class=>'btn btn-default', :title=>"Voltar" %> 
+<%= link_to link_icone('editar'), edit_veiculo_path(@veiculo), :class=>"btn btn-primary", :title=>"Editar" %> 
+<%= link_to link_icone('novo'), new_veiculo_path, :class=> 'btn btn-success', :title=>"Novo Veículo" %>
+
+<br/>

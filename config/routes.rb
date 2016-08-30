@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   resources :veiculos
   resources :imoveis
   resources :entidades
-  resources :pessoas
+  resources :pessoas do
+    get :autocomplete_pessoa_nome, :on => :collection
+  end
 
   resources :usuarios do
     get :redefinir_senha

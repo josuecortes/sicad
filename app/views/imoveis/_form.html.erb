@@ -2,14 +2,25 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :tipo %>
+    <%= f.input :tipo,:collection=>@tipos %>
     <%= f.input :logradouro %>
     <%= f.input :numero %>
-    <%= f.input :bairro %>
-    <%= f.input :cidade %>
+    <% if current_user.entidade and current_user.entidade.cidade and current_user.entidade.cidade.bairros.any?%>
+    <%= f.input :bairro_id,:collection=>current_user.entidade.cidade.bairros.collect{|b|[b.nome,b.id]}%>
+    <%else%>
+    <%= f.input :bairro_id,:disabled=>true,:placeholder=>"Sem bairros cadastrados nesta cidade" %>
+    <%end%>
+    <%= f.input :proprietario, :url => autocomplete_pessoa_nome_pessoas_path, :as => :autocomplete %>
+    <%if current_user.tipo=="ADMINISTRADOR"%>
+     <%= f.input :user_id,:label=>"Responsável",:collection=>User.da_entidade(current_user.entidade).order(:name).collect{|u|[u.name,u.id]} %>
+    <%else%>
+    <%= f.input :user_id,:as=>:hidden,:input_html=>{:value=>current_user.id}%>
+    <%end%>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+<div class="form-actions">
+    <%= link_to 'Voltar', imoveis_path, :class=>'btn btn-default' %>
+    <%= f.button :submit, :class=>"btn btn-primary" %>
   </div>
 <% end %>
+

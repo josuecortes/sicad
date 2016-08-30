@@ -1,5 +1,6 @@
 class ImoveisController < ApplicationController
   before_action :set_imovel, only: [:show, :edit, :update, :destroy]
+  before_action :dados
 
   # GET /imoveis
   # GET /imoveis.json
@@ -62,6 +63,10 @@ class ImoveisController < ApplicationController
   end
 
   private
+
+    def dados
+      @tipos = ["PLACA","MURO","CAVALETE","COMITÊ"]
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_imovel
       @imovel = Imovel.find(params[:id])
@@ -69,6 +74,6 @@ class ImoveisController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def imovel_params
-      params.require(:imovel).permit(:tipo, :logradouro, :numero, :bairro, :cidade)
+      params.require(:imovel).permit(:tipo, :logradouro,:user_id, :numero, :bairro_id, :cidade)
     end
 end

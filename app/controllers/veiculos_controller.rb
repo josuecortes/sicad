@@ -1,5 +1,6 @@
 class VeiculosController < ApplicationController
   before_action :set_veiculo, only: [:show, :edit, :update, :destroy]
+  before_action :dados
 
   # GET /veiculos
   # GET /veiculos.json
@@ -65,6 +66,10 @@ class VeiculosController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_veiculo
       @veiculo = Veiculo.find(params[:id])
+    end
+
+    def dados
+      @tipos = ["CARRO","MOTO","PICKUP","CAMINHAO"]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

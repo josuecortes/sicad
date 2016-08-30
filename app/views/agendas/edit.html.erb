@@ -1,6 +1,11 @@
-<h1>Editing Agenda</h1>
+<% content_for :titulo do %>
+ Agenda
+<% end %>
+
+<% content_for :sub_titulo do %>
+  <p>
+    Editando compromisso
+  </p>
+<% end %>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @agenda %> |
-<%= link_to 'Back', agendas_path %>

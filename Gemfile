@@ -37,3 +37,6 @@ gem "font-awesome-rails"
 gem 'cancancan'
 
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
+
+gem 'validates_timeliness', '~> 4.0'
+gem "simple_calendar", "~> 2.0"

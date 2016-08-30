@@ -1,5 +1,6 @@
 class PessoasController < ApplicationController
   before_action :set_pessoa, only: [:show, :edit, :update, :destroy]
+  autocomplete :pessoa, :nome, :full => true
 
   # GET /pessoas
   # GET /pessoas.json

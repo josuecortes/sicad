@@ -1,6 +1,11 @@
-<h1>Editing Imovel</h1>
+<% content_for :titulo do %>
+  Imóveis
+<% end %>
+
+<% content_for :sub_titulo do %>
+  <p>
+    Editar Imóvel
+  </p>
+<% end %>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @imovel %> |
-<%= link_to 'Back', imoveis_path %>

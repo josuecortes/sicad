@@ -1,5 +1,11 @@
-<h1>New Agenda</h1>
+<% content_for :titulo do %>
+ Agenda
+<% end %>
+
+<% content_for :sub_titulo do %>
+  <p>
+    Novo compromisso
+  </p>
+<% end %>
 
 <%= render 'form' %>
-
-<%= link_to 'Back', agendas_path %>

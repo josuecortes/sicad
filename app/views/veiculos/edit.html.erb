@@ -1,6 +1,11 @@
-<h1>Editing Veiculo</h1>
+<% content_for :titulo do %>
+ Veículos
+<% end %>
+
+<% content_for :sub_titulo do %>
+  <p>
+    Editando veículo <%=@veiculo.placa%>
+  </p>
+<% end %>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @veiculo %> |
-<%= link_to 'Back', veiculos_path %>

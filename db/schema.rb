@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160830134118) do
+ActiveRecord::Schema.define(version: 20160830200404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20160830134118) do
     t.string   "endereco"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "user_id"
   end
 
   create_table "bairros", force: :cascade do |t|
@@ -53,10 +54,11 @@ ActiveRecord::Schema.define(version: 20160830134118) do
     t.string   "tipo"
     t.string   "logradouro"
     t.string   "numero"
-    t.string   "bairro"
-    t.string   "cidade"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "bairro_id"
+    t.integer  "user_id"
+    t.string   "proprietario"
   end
 
   create_table "pessoas", force: :cascade do |t|
@@ -76,7 +78,6 @@ ActiveRecord::Schema.define(version: 20160830134118) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "user_id"
-    t.integer  "cidade_id"
     t.integer  "bairro_id"
   end
 
@@ -100,7 +101,6 @@ ActiveRecord::Schema.define(version: 20160830134118) do
     t.string   "tipo"
     t.boolean  "ativo",                  default: true
     t.boolean  "mudar_senha",            default: true
-    t.integer  "cidade_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(version: 20160830134118) do
     t.string   "contato"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "user_id"
   end
 
 end

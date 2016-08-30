@@ -1,29 +1,42 @@
-<p id="notice"><%= notice %></p>
+<% content_for :titulo do %>
+  Imóveis
+<% end %>
+
+<% content_for :sub_titulo do %>
+  Detalhes do Imóvel
+<% end %>
+
+
 
 <p>
   <strong>Tipo:</strong>
-  <%= @imovel.tipo %>
+  <%= detalhes(@imovel.tipo) %>
 </p>
 
 <p>
   <strong>Logradouro:</strong>
-  <%= @imovel.logradouro %>
+  <%= detalhes(@imovel.logradouro) %>
 </p>
 
 <p>
   <strong>Numero:</strong>
-  <%= @imovel.numero %>
+  <%= detalhes(@imovel.numero) %>
 </p>
 
 <p>
   <strong>Bairro:</strong>
-  <%= @imovel.bairro %>
+  <%= detalhes2(@imovel.bairro,:nome) %>
 </p>
 
 <p>
   <strong>Cidade:</strong>
-  <%= @imovel.cidade %>
+  <%= detalhes2(@imovel.user.entidade.cidade, :nome) %>
 </p>
 
-<%= link_to 'Edit', edit_imovel_path(@imovel) %> |
-<%= link_to 'Back', imoveis_path %>
+<br/>
+
+<%= link_to link_icone('voltar'), imoveis_path, :class=>'btn btn-default', :title=>"Voltar" %> 
+<%= link_to link_icone('editar'), edit_imovel_path(@imovel), :class=>"btn btn-primary", :title=>"Editar" %> 
+<%= link_to link_icone('novo'), new_imovel_path, :class=> 'btn btn-success', :title=>"Novo Imóvel" %>
+
+<br/>

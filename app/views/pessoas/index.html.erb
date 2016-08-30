@@ -17,6 +17,7 @@
       <th>Nome</th>
       <th>Nascimento</th>
       <th>Sexo</th>
+      <th>Superior</th>
       <th>Ações</th>
     </tr>
   </thead>
@@ -27,6 +28,7 @@
         <td><%= pessoa.nome %></td>
         <td><%= pessoa.nascimento %></td>
         <td><%= pessoa.sexo %></td>
+        <td><%= detalhes2(pessoa.user, :name) %></td>
         <td>
           <%= link_to link_icone('detalhes'), pessoa, :class => 'btn btn-default' %>
           <%= link_to link_icone('editar'), edit_pessoa_path(pessoa), :class => 'btn btn-primary' %>

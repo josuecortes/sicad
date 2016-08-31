@@ -26,4 +26,6 @@ class Imovel < ActiveRecord::Base
 
 		end 
 
+		scope :da_entidade, ->(ent) { where("entidade_id = ?", ent) }
+
 end

@@ -55,6 +55,10 @@ class Pessoa < ActiveRecord::Base
   geocoded_by :address
   after_validation :geocode   
 
-  scope :da_entidade, ->(ent) { where("entidade_id = ?", ent) }   
+  scope :da_entidade, ->(id) { where("entidade_id = ?", id) }   
+
+  scope :do_usuario, ->(id) { where("user_id = ?", id) }   
+
+  scope :do_bairro, ->(id) { where("bairro_id = ?", id) }   
 
 end

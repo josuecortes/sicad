@@ -15,4 +15,47 @@ class HomeController < ApplicationController
 
   def nao_autorizado
   end
+
+  def pessoas
+
+    if current_user.tipo == "MASTER"
+
+      if params[:usuario_id].blank?
+        @usuario = nil
+        @pessoas = Pessoa.all
+      else
+        @usuario = User.find(params[:usuario_id])
+        @pessoas = Pessoa.do_usuario(@usuario.id)
+      end
+
+
+      if params[:bairro_id].blank?
+        @bairro = nil
+      else
+        @bairro = Bairro.find(params[:bairro_id])
+        @pessoas = @pessoas.do_bairro(@bairro.id)
+      end
+    
+    else
+
+      if params[:usuario_id].blank?
+        @usuario = nil
+        @pessoas = Pessoa.da_entidade(current_user.entidade_id)
+      else
+        @usuario = User.find(params[:usuario_id])
+        @pessoas = Pessoa.do_usuario(@usuario.id)
+      end
+
+
+      if params[:bairro_id].blank?
+        @bairro = nil
+      else
+        @bairro = Bairro.find(params[:bairro_id])
+        @pessoas = @pessoas.do_bairro(@bairro.id)
+      end
+
+    end
+   
+  end
+
 end

@@ -3,9 +3,11 @@
 <% end %>
 
 <% content_for :sub_titulo do %>
-  <ul class="list-inline pull-right">
-    <%= link_to link_icone2('nova','Adicionar'), new_pessoa_path, :class=> 'btn btn-success', :title=>"Nova Pessoa" %>
-  </ul>
+  <% if can? :create, Pessoa %>
+    <ul class="list-inline pull-right">
+      <%= link_to link_icone2('nova','Adicionar'), new_pessoa_path, :class=> 'btn btn-success', :title=>"Nova Pessoa" %>
+    </ul>
+  <% end %>
   <p>
     Lista de Pessoas
   </p>

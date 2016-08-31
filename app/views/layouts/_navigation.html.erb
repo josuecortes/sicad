@@ -16,18 +16,22 @@
         <li>
             <a href="/agendas"><i class="fa fa-fw fa-calendar"></i> Agenda</a>
         </li>
-        <li>
-            <a href="/usuarios"><i class="fa fa-fw fa-user"></i> Usuários</a>
-        </li>
-        <li>
-            <a href="/entidades"><i class="fa fa-fw fa-user-plus"></i> Entidades</a>
-        </li>
-        <li>
-            <a href="/cidades"><i class="fa fa-fw fa-map"></i> Cidades</a>
-        </li>
-        <li>
-            <a href="/bairros"><i class="fa fa-fw fa-map-marker"></i> Bairros</a>
-        </li>
+        <% if current_user.tipo == "MASTER" or current_user.tipo == "ADMINISTRADOR" %>
+            <li>
+                <a href="/usuarios"><i class="fa fa-fw fa-user"></i> Usuários</a>
+            </li>
+        <% end %>
+        <% if current_user.tipo == "MASTER" %>
+            <li>
+                <a href="/entidades"><i class="fa fa-fw fa-user-plus"></i> Entidades</a>
+            </li>
+            <li>
+                <a href="/cidades"><i class="fa fa-fw fa-map"></i> Cidades</a>
+            </li>
+            <li>
+                <a href="/bairros"><i class="fa fa-fw fa-map-marker"></i> Bairros</a>
+            </li>
+        <% end %>
     </ul>
 </div>
 <!-- /.navbar-collapse -->

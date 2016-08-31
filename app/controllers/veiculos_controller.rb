@@ -1,11 +1,12 @@
 class VeiculosController < ApplicationController
   before_action :set_veiculo, only: [:show, :edit, :update, :destroy]
   before_action :dados
+  load_and_authorize_resource :class=>"Veiculo"
 
   # GET /veiculos
   # GET /veiculos.json
   def index
-    @veiculos = Veiculo.all
+    @veiculos = Veiculo.accessible_by(current_ability).all
   end
 
   # GET /veiculos/1
@@ -65,7 +66,7 @@ class VeiculosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_veiculo
-      @veiculo = Veiculo.find(params[:id])
+      @veiculo = Veiculo.accessible_by(current_ability).find(params[:id])
     end
 
     def dados
@@ -74,6 +75,6 @@ class VeiculosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def veiculo_params
-      params.require(:veiculo).permit(:tipo, :placa, :proprietario, :contato)
+      params.require(:veiculo).permit(:tipo, :placa, :proprietario, :contato, :entidade_id, :user_id)
     end
 end

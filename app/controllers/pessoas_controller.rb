@@ -1,11 +1,12 @@
 class PessoasController < ApplicationController
   before_action :set_pessoa, only: [:show, :edit, :update, :destroy]
   autocomplete :pessoa, :nome, :full => true
+  load_and_authorize_resource :class=>"Pessoa"
 
   # GET /pessoas
   # GET /pessoas.json
   def index
-    @pessoas = Pessoa.all
+    @pessoas = Pessoa.accessible_by(current_ability).all
   end
 
   # GET /pessoas/1
@@ -65,7 +66,7 @@ class PessoasController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_pessoa
-      @pessoa = Pessoa.find(params[:id])
+      @pessoa = Pessoa.accessible_by(current_ability).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

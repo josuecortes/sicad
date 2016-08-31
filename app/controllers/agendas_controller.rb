@@ -1,10 +1,11 @@
 class AgendasController < ApplicationController
   before_action :set_agenda, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource :class=>"Agenda"
 
   # GET /agendas
   # GET /agendas.json
   def index
-    @agendas = Agenda.all
+    @agendas = Agenda.accessible_by(current_ability).all
   end
 
   # GET /agendas/1
@@ -64,11 +65,11 @@ class AgendasController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_agenda
-      @agenda = Agenda.find(params[:id])
+      @agenda = Agenda.accessible_by(current_ability).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def agenda_params
-      params.require(:agenda).permit(:data, :hora, :responsavel, :contato, :endereco)
+      params.require(:agenda).permit(:data, :hora, :responsavel, :contato, :endereco, :entidade_id, :user_id)
     end
 end

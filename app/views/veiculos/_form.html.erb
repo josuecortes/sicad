@@ -13,6 +13,8 @@
     <%end%>
   </div>
 
+  <%= f.input :user_id,:as=>:hidden,:input_html=>{:value=>current_user.id}%>
+
 <div class="form-actions">
     <%= link_to 'Voltar', veiculos_path, :class=>'btn btn-default' %>
     <%= f.button :submit, :class=>"btn btn-primary" %>

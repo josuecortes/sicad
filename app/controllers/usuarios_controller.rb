@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class UsuariosController < ApplicationController
-  
+  before_filter :e_usuario
   load_and_authorize_resource :class=>"User", except: :create
   
   def index
@@ -108,6 +108,12 @@ class UsuariosController < ApplicationController
     params.require(:user).permit(:name, :cpf, :entidade_id, :superior_id, :tipo, :ativo, :mudar_senha, :email, :password, 
                                  :password_confirmation, :sign_in_count, :current_sign_in_at, 
                                  :last_sign_in_at, :current_sign_in_ip, :last_sign_in_ip)
+  end
+
+  def e_usuario
+    if current_user.tipo == "USUARIO"
+      redirect_to edit_user_registration_path
+    end
   end
 
 end

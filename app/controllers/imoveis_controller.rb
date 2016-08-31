@@ -1,11 +1,12 @@
 class ImoveisController < ApplicationController
   before_action :set_imovel, only: [:show, :edit, :update, :destroy]
   before_action :dados
+  load_and_authorize_resource :class=>"Imovel"
 
   # GET /imoveis
   # GET /imoveis.json
   def index
-    @imoveis = Imovel.all
+    @imoveis = Imovel.accessible_by(current_ability).all
   end
 
   # GET /imoveis/1
@@ -69,11 +70,11 @@ class ImoveisController < ApplicationController
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_imovel
-      @imovel = Imovel.find(params[:id])
+      @imovel = Imovel.accessible_by(current_ability).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def imovel_params
-      params.require(:imovel).permit(:tipo, :logradouro, :user_id, :numero, :bairro_id, :proprietario)
+      params.require(:imovel).permit(:tipo, :logradouro, :user_id, :numero, :bairro_id, :proprietario, :entidade_id)
     end
 end

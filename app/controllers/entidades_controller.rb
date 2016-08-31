@@ -1,5 +1,6 @@
 class EntidadesController < ApplicationController
   before_action :set_entidade, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource :class=>"Entidade"
 
   # GET /entidades
   # GET /entidades.json

@@ -33,4 +33,12 @@ class User < ActiveRecord::Base
     end
   end
 
+  before_save :maiusculas_sem_acentos
+
+  def maiusculas_sem_acentos
+
+    self.name = ActiveSupport::Inflector.transliterate(self.name).upcase if !self.name.blank?  
+    
+  end
+
 end

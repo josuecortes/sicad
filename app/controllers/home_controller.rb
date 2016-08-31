@@ -43,7 +43,7 @@ class HomeController < ApplicationController
         @pessoas = Pessoa.da_entidade(current_user.entidade_id)
       else
         @usuario = User.find(params[:usuario_id])
-        @pessoas = Pessoa.do_usuario(@usuario.id)
+        @pessoas = Pessoa.da_entidade(current_user.entidade_id).do_usuario(@usuario.id)
       end
 
 
@@ -51,7 +51,7 @@ class HomeController < ApplicationController
         @bairro = nil
       else
         @bairro = Bairro.find(params[:bairro_id])
-        @pessoas = @pessoas.do_bairro(@bairro.id)
+        @pessoas = @pessoas.da_entidade(current_user).do_bairro(@bairro.id)
       end
 
     end

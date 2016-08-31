@@ -29,9 +29,9 @@
 <br/><br/>
 
 <div class="row">
-  <div class="col-lg-6">
+  <div class="col-lg-12">
 
-  	<h4>Lista de Pessoas <%= "do Usuario: #{@usuario.name}" if @usuario != nil %> <%= "no Bairro: #{@bairro.nome}" if @bairro != nil %> <br/> TOTAL (<%= @pessoas.count %>)</h4><br/>
+  	<h4>Lista de Pessoas <%= "do USUÁRIO: #{@usuario.name}" if @usuario != nil %> <%= "no BAIRRO: #{@bairro.nome}" if @bairro != nil %> | TOTAL (<%= @pessoas.count %>)</h4><br/>
 
   	<table id="tabela" class="display" cellspacing="0" width="100%">
 		  <thead>
@@ -46,7 +46,7 @@
 		    <% @pessoas.each do |p| %>
 		      <tr>
 		        <td><%= p.nome %></td>
-		        <td><%= detalhes2(p.bairro.cidade, :nome) %></td>
+		        <td><%= detalhes2(p.bairro, :nome) %></td>
 		        <td><%= detalhes2(p.user, :name) %></td>
 		      </tr>
 		    <% end %>
@@ -54,7 +54,7 @@
 		</table>      
   </div>
 
-	<div class="col-lg-6">
+	<div class="col-lg-12">
   	<% if @pessoas.count > 0 %>
 
 			<h4> Localização Aproximada no Mapa</h4><br/>

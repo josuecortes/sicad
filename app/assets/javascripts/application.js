@@ -32,6 +32,11 @@
 // require morris
 // require raphael.min 
 //= require gmaps/google
+//= require maps
+//= require markerclusterer
+//= require infobox_packed
+//= require gmaps
+
 
 jQuery(function($){
    $(".data").mask("99/99/9999");

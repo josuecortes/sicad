@@ -84,7 +84,6 @@ ActiveRecord::Schema.define(version: 20160831141813) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "user_id"
-    t.integer  "cidade_id"
     t.integer  "bairro_id"
     t.float    "latitude"
     t.float    "longitude"
@@ -110,7 +109,6 @@ ActiveRecord::Schema.define(version: 20160831141813) do
     t.string   "tipo"
     t.boolean  "ativo",                  default: true
     t.boolean  "mudar_senha",            default: true
-    t.integer  "cidade_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

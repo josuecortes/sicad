@@ -12,6 +12,8 @@
  *
  *= require_self
  *= require dataTables/jquery.dataTables
+ *= require datatables_responsive
+ *= require datatables_rowreorder
  *= require jquery-ui
  *= require bootstrap
  *= require bootstrap.min

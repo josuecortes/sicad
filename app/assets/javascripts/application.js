@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require jquery.maskedinput.min
 //= require dataTables/jquery.dataTables
+//= require datatables_responsive
+//= require datatables_rowreorder
 //= require pessoas
 //= require entidades
 //= require usuarios
@@ -39,17 +41,21 @@
 
 
 jQuery(function($){
-   $(".data").mask("99/99/9999");
-   $(".telefone").mask("(99) 99999-9999");
-   $(".cpf").mask("999.999.999-99");
-   $(".placa").mask("aaa-9999");
-   $(".ssn").mask("999-99-9999");
-   $(".hora").mask("99:99");
+ $(".data").mask("99/99/9999");
+ $(".telefone").mask("(99) 99999-9999");
+ $(".cpf").mask("999.999.999-99");
+ $(".placa").mask("aaa-9999");
+ $(".ssn").mask("999-99-9999");
+ $(".hora").mask("99:99");
 });
 
 $(".placa").css("text-transform", "uppercase");
 
 $('#tabela').dataTable({
+  rowReorder: {
+    selector: 'td:nth-child(2)'
+  },
+  responsive: true,
   "language": {
     "sProcessing":    "Processando...",
     "sLengthMenu":    "Mostrar _MENU_ Registros",

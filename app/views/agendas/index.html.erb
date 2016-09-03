@@ -14,6 +14,7 @@
 <table id="tabela" class="display" cellspacing="0" width="100%">
   <thead>
     <tr>
+    <th>Assunto</th>
       <th>Data</th>
       <th>Hora</th>
       <th>Responsável</th>
@@ -24,6 +25,7 @@
   <tbody>
     <% @agendas.each do |agenda| %>
       <tr>
+      <td><%= detalhes(agenda.assunto) %></td>
         <td><%= detalhes(agenda.data_hora.strftime("%d/%m/%Y")) %></td>
         <td><%= detalhes(agenda.data_hora.strftime("%H:%M")) %></td>
         <td><%= detalhes2(agenda.user,:name) %></td>

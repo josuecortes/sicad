@@ -15,7 +15,7 @@
   </div>
 
   <%= f.input :user_id,:as=>:hidden,:input_html=>{:value=>current_user.id}%>
-  <%= f.input :entidade,:as=>:hidden,:input_html=>{:value=>current_user.id}%>
+  <%= f.input :entidade_id,:as=>:hidden,:input_html=>{:value=>current_user.id}%>
 
 <div class="form-actions">
     <%= link_to 'Voltar', agendas_path, :class=>'btn btn-default' %>

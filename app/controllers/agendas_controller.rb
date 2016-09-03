@@ -70,6 +70,6 @@ class AgendasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def agenda_params
-      params.require(:agenda).permit(:data, :hora, :responsavel, :contato, :endereco, :entidade_id, :user_id)
+      params.require(:agenda).permit(:data, :hora, :responsavel, :contato, :endereco, :entidade_id, :user_id,:data_hora,:assunto)
     end
 end

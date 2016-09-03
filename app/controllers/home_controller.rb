@@ -5,11 +5,13 @@ class HomeController < ApplicationController
   		@pessoas = Pessoa.all
   		@imoveis = Imovel.all
   		@veiculos = Veiculo.all
+      @agendas = Agenda.where("data_hora >= ?",Time.now)
   	else
   		@usuarios = User.da_entidade(current_user.entidade_id)
   		@pessoas = Pessoa.da_entidade(current_user.entidade_id)
   		@imoveis = Imovel.da_entidade(current_user.entidade_id)
   		@veiculos = Veiculo.da_entidade(current_user.entidade_id)
+      @agendas = Agenda.da_entidade(current_user.entidade_id).where("data_hora >= ?",Time.now)
   	end
   end
 

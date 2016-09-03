@@ -44,4 +44,5 @@ gem 'gmaps4rails'
 
 gem 'validates_timeliness', '~> 4.0'
 gem "simple_calendar", "~> 2.0"
+gem 'rails-i18n'
 

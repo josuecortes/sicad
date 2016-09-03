@@ -2,8 +2,9 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :data ,:input_html=>{:class=>"data"} %>
-    <%= f.input :hora,:input_html=>{:class=>"hora"}  %>
+    <%= f.input :assunto%> 
+    <%= f.input :data_hora %>
+    <%#= f.input :hora,:input_html=>{:class=>"hora"}  %>
     <%= f.input :contato,:input_html=>{:class=>"telefone"} %>
     <%= f.input :endereco %>
    <%if current_user.tipo=="ADMINISTRADOR"%>
@@ -14,6 +15,7 @@
   </div>
 
   <%= f.input :user_id,:as=>:hidden,:input_html=>{:value=>current_user.id}%>
+  <%= f.input :entidade,:as=>:hidden,:input_html=>{:value=>current_user.id}%>
 
 <div class="form-actions">
     <%= link_to 'Voltar', agendas_path, :class=>'btn btn-default' %>

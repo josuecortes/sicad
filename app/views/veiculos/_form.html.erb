@@ -6,17 +6,24 @@
     <%= f.input :placa ,:input_html=>{:class=>"placa"}%>
     <%= f.input :proprietario, :url => autocomplete_pessoa_nome_pessoas_path, :as => :autocomplete %>
     <%= f.input :contato,:input_html=>{:class=>"telefone"}%>
-     <%if current_user.tipo=="ADMINISTRADOR"%>
+    <%if current_user.tipo=="ADMINISTRADOR"%>
      <%= f.input :user_id,:label=>"Responsável",:collection=>User.da_entidade(current_user.entidade).order(:name).collect{|u|[u.name,u.id]} %>
     <%else%>
-    <%= f.input :user_id,:as=>:hidden,:input_html=>{:value=>current_user.id}%>
+      <%= f.input :user_id,:as=>:hidden,:input_html=>{:value=>current_user.id}%>
     <%end%>
   </div>
 
-  <%= f.input :user_id,:as=>:hidden,:input_html=>{:value=>current_user.id}%>
+  <%= f.input :user_id, :as=>:hidden, :input_html=>{:value=>current_user.id}%>
 
-<div class="form-actions">
+  <%= f.input :entidade_id, :as=>:hidden, :input_html=>{:value=>current_user.entidade_id}%>
+
+  <br/>
+
+  <div class="form-actions">
     <%= link_to 'Voltar', veiculos_path, :class=>'btn btn-default' %>
     <%= f.button :submit, :class=>"btn btn-primary" %>
   </div>
+
+  <br/>
+
 <% end %>

@@ -104,4 +104,45 @@ class HomeController < ApplicationController
 
 
 
+  def veiculos
+    if current_user.tipo == "MASTER"
+
+      if params[:usuario_id].blank?
+        @usuario = nil
+        @veiculos = Veiculo.all
+      else
+        @usuario = User.find(params[:usuario_id])
+        @veiculos = Veiculo.do_usuario(@usuario.id)
+      end
+
+
+      if params[:tipo].blank?
+        @tipo = nil
+      else
+        @tipo = params[:tipo]
+        @veiculos = @veiculos.do_tipo(@tipo)
+      end
+    
+    else
+
+      if params[:usuario_id].blank?
+        @usuario = nil
+        @veiculos = Veiculo.da_entidade(current_user.entidade_id)
+      else
+        @usuario = User.find(params[:usuario_id])
+        @veiculos = Veiculo.da_entidade(current_user.entidade_id).do_usuario(@usuario.id)
+      end
+
+
+      if params[:tipo].blank?
+        @tipo = nil
+      else
+        @tipo = params[:tipo]
+        @veiculos = @veiculos.do_tipo(@tipo)
+      end
+
+    end
+  end
+
+
 end

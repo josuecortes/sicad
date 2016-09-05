@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'home/nao_autorizado'
   get 'home/pessoas'
   get 'home/imoveis'
+  get 'home/veiculos'
 
   resources :agendas
   resources :veiculos

@@ -42,6 +42,7 @@
 
 jQuery(function($){
  $(".data").mask("99/99/9999");
+ $(".datahora").mask("99/99/9999 99:99");
  $(".telefone").mask("(99) 99999-9999");
  $(".cpf").mask("999.999.999-99");
  $(".placa").mask("aaa-9999");
@@ -51,7 +52,7 @@ jQuery(function($){
 
 $(".placa").css("text-transform", "uppercase");
 
-$('#tabela').dataTable({
+$('table.display').dataTable({
   rowReorder: {
     selector: 'td:nth-child(2)'
   },

@@ -2,10 +2,16 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-
-
+    
     <div class="row">
       <div class="col-lg-6">
+
+        <div class="row">
+          <div class="col-lg-12">
+            <%= f.input :emplacado, :collection=>@simnao, :include_blank => false %>
+          </div>
+        </div>
+
         <div class="row">
           <div class="col-lg-7">
             <%= f.input :proprietario, :url => autocomplete_pessoa_nome_pessoas_path, :as => :autocomplete %>        
@@ -14,6 +20,10 @@
             <%= f.input :tipo,:collection=>@tipos %>        
           </div>
         </div>
+        
+      </div>
+      <div class="col-lg-6">
+       
         <div class="row">
           <div class="col-lg-9">
             <%= f.input :logradouro %>
@@ -22,8 +32,7 @@
             <%= f.input :numero %>
           </div>
         </div>
-      </div>
-      <div class="col-lg-6">
+      
         <div class="row">
           <div class="col-lg-12">
             <% if current_user.entidade and current_user.entidade.cidade and current_user.entidade.cidade.bairros.any?%>

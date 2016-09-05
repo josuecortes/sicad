@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'home/pessoas'
   get 'home/imoveis'
   get 'home/veiculos'
+  get 'home/geral'
 
   resources :agendas
   resources :veiculos

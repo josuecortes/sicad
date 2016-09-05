@@ -71,10 +71,11 @@ class VeiculosController < ApplicationController
 
     def dados
       @tipos = ["CARRO","MOTO","PICKUP","CAMINHAO"]
+      @simnao = [['NAO',false], ['SIM',true]]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def veiculo_params
-      params.require(:veiculo).permit(:tipo, :placa, :proprietario, :contato, :entidade_id, :user_id)
+      params.require(:veiculo).permit(:tipo, :placa, :proprietario, :contato, :entidade_id, :user_id, :adesivado)
     end
 end

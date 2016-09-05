@@ -144,5 +144,14 @@ class HomeController < ApplicationController
     end
   end
 
+  def geral
+    @usuarios = User.da_entidade(current_user.entidade_id).order('name ASC')
+    @pessoas = Pessoa.da_entidade(current_user.entidade_id).order('nome ASC')
+    @imoveis = Imovel.da_entidade(current_user.entidade_id).order('proprietario ASC')
+    @veiculos = Veiculo.da_entidade(current_user.entidade_id).order('tipo ASC')
+    @reunioes = Agenda.da_entidade(current_user.entidade_id)
+    @reunioes_concluidas = Agenda.da_entidade(current_user.entidade_id).where('data_hora < ?', DateTime.now)
+    @proximas_reunioes = Agenda.da_entidade(current_user.entidade_id).where('data_hora >= ?', DateTime.now)
+  end
 
 end

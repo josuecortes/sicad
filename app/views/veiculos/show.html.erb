@@ -31,6 +31,12 @@
   <strong>Responsavel:</strong>
   <%= detalhes2(@veiculo.user,:name) %>
 </p>
+
+<p>
+  <strong>Adesivado:</strong>
+  <%= simnao(@veiculo.adesivado) %>
+</p>
+
 <br/>
 
 <%= link_to link_icone('voltar'), veiculos_path, :class=>'btn btn-default', :title=>"Voltar" %> 

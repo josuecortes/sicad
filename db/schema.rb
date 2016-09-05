@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160903032051) do
+ActiveRecord::Schema.define(version: 20160905144510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,14 +59,15 @@ ActiveRecord::Schema.define(version: 20160903032051) do
     t.string   "tipo"
     t.string   "logradouro"
     t.string   "numero"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "bairro_id"
     t.integer  "user_id"
     t.string   "proprietario"
     t.float    "latitude"
     t.float    "longitude"
     t.integer  "entidade_id"
+    t.boolean  "emplacado",    default: false
   end
 
   create_table "pessoas", force: :cascade do |t|
@@ -123,10 +124,11 @@ ActiveRecord::Schema.define(version: 20160903032051) do
     t.string   "placa"
     t.string   "proprietario"
     t.string   "contato"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "user_id"
     t.integer  "entidade_id"
+    t.boolean  "adesivado",    default: false
   end
 
 end

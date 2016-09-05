@@ -38,6 +38,7 @@
 		    <tr>
 		      <th>Proprietario</th>
 		      <th>Bairro</th>
+		      <th>Emplacado</th>
 		      <th>Usuário</th>
 		    </tr>
 		  </thead>
@@ -47,6 +48,7 @@
 		      <tr>
 		        <td><%= i.proprietario %></td>
 		        <td><%= detalhes2(i.bairro, :nome) %></td>
+		        <td><%= simnao(i.emplacado) %></td>
 		        <td><%= detalhes2(i.user, :name) %></td>
 		      </tr>
 		    <% end %>

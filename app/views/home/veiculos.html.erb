@@ -38,6 +38,7 @@
 		    <tr>
 		      <th>Proprietario</th>
 		      <th>Tipo</th>
+		      <th>Adesivado</th>
 		      <th>Responsavel</th>
 		    </tr>
 		  </thead>
@@ -47,6 +48,7 @@
 		      <tr>
 		        <td><%= v.proprietario %></td>
 		        <td><%= v.tipo %></td>
+		        <td><%= simnao(v.adesivado) %></td>
 		        <td><%= detalhes2(v.user, :name) %></td>
 		      </tr>
 		    <% end %>

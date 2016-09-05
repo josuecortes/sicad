@@ -14,6 +14,8 @@ class HomeController < ApplicationController
   end
 
   def nao_autorizado
+  
+
   end
 
   def pessoas
@@ -57,5 +59,47 @@ class HomeController < ApplicationController
     end
    
   end
+
+  def imoveis
+    if current_user.tipo == "MASTER"
+
+      if params[:usuario_id].blank?
+        @usuario = nil
+        @imoveis = Imovel.all
+      else
+        @usuario = User.find(params[:usuario_id])
+        @imoveis = Imovel.do_usuario(@usuario.id)
+      end
+
+
+      if params[:bairro_id].blank?
+        @bairro = nil
+      else
+        @bairro = Bairro.find(params[:bairro_id])
+        @imoveis = @imoveis.do_bairro(@bairro.id)
+      end
+    
+    else
+
+      if params[:usuario_id].blank?
+        @usuario = nil
+        @imoveis = Imovel.da_entidade(current_user.entidade_id)
+      else
+        @usuario = User.find(params[:usuario_id])
+        @imoveis = Imovel.da_entidade(current_user.entidade_id).do_usuario(@usuario.id)
+      end
+
+
+      if params[:bairro_id].blank?
+        @bairro = nil
+      else
+        @bairro = Bairro.find(params[:bairro_id])
+        @imoveis = @imoveis.da_entidade(current_user).do_bairro(@bairro.id)
+      end
+
+    end
+  end
+
+
 
 end

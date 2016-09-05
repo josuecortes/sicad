@@ -5,6 +5,9 @@ class Ability
     if user.tipo == "MASTER"
       can :manage, :all
       cannot :create, Pessoa
+      cannot :create, Imovel
+      cannot :create, Veiculo
+      cannot :create, Agenda
 
     end
     if user.tipo == "ADMINISTRADOR"

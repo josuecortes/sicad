@@ -2,7 +2,7 @@ class Imovel < ActiveRecord::Base
     belongs_to :user
     belongs_to :bairro
 
-    validates_presence_of :tipo, :logradouro, :numero, :bairro_id
+    validates_presence_of :tipo, :logradouro, :numero, :bairro_id, :user_id
 
     attr_accessor :address
 
@@ -26,6 +26,10 @@ class Imovel < ActiveRecord::Base
 
 		end 
 
-		scope :da_entidade, ->(ent) { where("entidade_id = ?", ent) }
+		scope :da_entidade, ->(id) { where("entidade_id = ?", id) }   
+
+  	scope :do_usuario, ->(id) { where("user_id = ?", id) }   
+
+  	scope :do_bairro, ->(id) { where("bairro_id = ?", id) }  
 
 end

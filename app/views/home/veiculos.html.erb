@@ -1,0 +1,60 @@
+<% content_for :titulo do %>
+  <i class="fa fa-desktop" aria-hidden="true"></i> Relatorio de Imoveis
+<% end %>
+
+<%= form_tag("/home/veiculos", method: "get") do %>
+ 	
+	<% if current_user.tipo != "MASTER" %>
+
+	 	<strong>Usuário:</strong>
+	  <%= select_tag(:usuario_id, options_for_select(User.da_entidade(current_user.entidade_id).where('tipo != ? and tipo != ?', 'ADMINISTRADOR', 'MASTER').order('name ASC').collect {|u| [u.name, u.id]}), include_blank: true) %>
+	  
+	  <strong>Tipo:</strong>
+	  <%= select_tag(:tipo, options_for_select(['CARRO', 'MOTO', 'PICKUP', 'CAMINHAO']), include_blank: true) %>
+  
+  <% else %>
+
+  	<strong>Usuário:</strong>
+	  <%= select_tag(:usuario_id, options_for_select(User.where('tipo != ? and tipo != ?', 'ADMINISTRADOR', 'MASTER').order('name ASC').collect {|u| [u.name, u.id]}), include_blank: true) %>
+	  
+	  <strong>Tipo:</strong>
+	  <%= select_tag(:tipo, options_for_select('CARRO', 'MOTO', 'PICKUP', 'CAMINHAO'), include_blank: true) %>
+
+  <% end %>
+	
+	<%= submit_tag("Pesquisar") %>
+
+<% end %>
+
+<br/>
+
+<div class="row">
+  <div class="col-lg-12">
+
+  	<h4>Lista de Veiculos <%= "do USUÁRIO: #{@usuario.name}" if @usuario != nil %> <%= "do TIPO: #{@tipo}" if @tipo != nil %> | TOTAL (<%= @veiculos.count %>)</h4><br/>
+
+  	<table id="tabela" class="display" cellspacing="0" width="100%">
+		  <thead>
+		    <tr>
+		      <th>Proprietario</th>
+		      <th>Tipo</th>
+		      <th>Adesivado</th>
+		      <th>Responsavel</th>
+		    </tr>
+		  </thead>
+
+		  <tbody>
+		    <% @veiculos.each do |v| %>
+		      <tr>
+		        <td><%= v.proprietario %></td>
+		        <td><%= v.tipo %></td>
+		        <td><%= simnao(v.adesivado) %></td>
+		        <td><%= detalhes2(v.user, :name) %></td>
+		      </tr>
+		    <% end %>
+		  </tbody>
+		</table>      
+  </div>
+</div>
+
+<br/>

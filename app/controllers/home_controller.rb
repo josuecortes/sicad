@@ -16,6 +16,8 @@ class HomeController < ApplicationController
   end
 
   def nao_autorizado
+  
+
   end
 
   def pessoas
@@ -58,6 +60,98 @@ class HomeController < ApplicationController
 
     end
    
+  end
+
+  def imoveis
+    if current_user.tipo == "MASTER"
+
+      if params[:usuario_id].blank?
+        @usuario = nil
+        @imoveis = Imovel.all
+      else
+        @usuario = User.find(params[:usuario_id])
+        @imoveis = Imovel.do_usuario(@usuario.id)
+      end
+
+
+      if params[:bairro_id].blank?
+        @bairro = nil
+      else
+        @bairro = Bairro.find(params[:bairro_id])
+        @imoveis = @imoveis.do_bairro(@bairro.id)
+      end
+    
+    else
+
+      if params[:usuario_id].blank?
+        @usuario = nil
+        @imoveis = Imovel.da_entidade(current_user.entidade_id)
+      else
+        @usuario = User.find(params[:usuario_id])
+        @imoveis = Imovel.da_entidade(current_user.entidade_id).do_usuario(@usuario.id)
+      end
+
+
+      if params[:bairro_id].blank?
+        @bairro = nil
+      else
+        @bairro = Bairro.find(params[:bairro_id])
+        @imoveis = @imoveis.da_entidade(current_user).do_bairro(@bairro.id)
+      end
+
+    end
+  end
+
+
+
+  def veiculos
+    if current_user.tipo == "MASTER"
+
+      if params[:usuario_id].blank?
+        @usuario = nil
+        @veiculos = Veiculo.all
+      else
+        @usuario = User.find(params[:usuario_id])
+        @veiculos = Veiculo.do_usuario(@usuario.id)
+      end
+
+
+      if params[:tipo].blank?
+        @tipo = nil
+      else
+        @tipo = params[:tipo]
+        @veiculos = @veiculos.do_tipo(@tipo)
+      end
+    
+    else
+
+      if params[:usuario_id].blank?
+        @usuario = nil
+        @veiculos = Veiculo.da_entidade(current_user.entidade_id)
+      else
+        @usuario = User.find(params[:usuario_id])
+        @veiculos = Veiculo.da_entidade(current_user.entidade_id).do_usuario(@usuario.id)
+      end
+
+
+      if params[:tipo].blank?
+        @tipo = nil
+      else
+        @tipo = params[:tipo]
+        @veiculos = @veiculos.do_tipo(@tipo)
+      end
+
+    end
+  end
+
+  def geral
+    @usuarios = User.da_entidade(current_user.entidade_id).order('name ASC')
+    @pessoas = Pessoa.da_entidade(current_user.entidade_id).order('nome ASC')
+    @imoveis = Imovel.da_entidade(current_user.entidade_id).order('proprietario ASC')
+    @veiculos = Veiculo.da_entidade(current_user.entidade_id).order('tipo ASC')
+    @reunioes = Agenda.da_entidade(current_user.entidade_id)
+    @reunioes_concluidas = Agenda.da_entidade(current_user.entidade_id).where('data_hora < ?', DateTime.now)
+    @proximas_reunioes = Agenda.da_entidade(current_user.entidade_id).where('data_hora >= ?', DateTime.now)
   end
 
 end

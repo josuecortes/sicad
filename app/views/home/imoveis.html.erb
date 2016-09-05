@@ -1,0 +1,112 @@
+<% content_for :titulo do %>
+  <i class="fa fa-desktop" aria-hidden="true"></i> Relatorio de Imoveis
+<% end %>
+
+<%= form_tag("/home/imoveis", method: "get") do %>
+ 	
+	<% if current_user.tipo != "MASTER" %>
+
+	 	<strong>Usuário:</strong>
+	  <%= select_tag(:usuario_id, options_for_select(User.da_entidade(current_user.entidade_id).where('tipo != ? and tipo != ?', 'ADMINISTRADOR', 'MASTER').order('name ASC').collect {|u| [u.name, u.id]}), include_blank: true) %>
+	  
+	  <strong>Bairro:</strong>
+	  <%= select_tag(:bairro_id, options_for_select(Bairro.da_cidade(current_user.entidade.cidade.id).order('nome ASC').collect {|b| [b.nome, b.id]}), include_blank: true) %>
+  
+  <% else %>
+
+  	<strong>Usuário:</strong>
+	  <%= select_tag(:usuario_id, options_for_select(User.where('tipo != ? and tipo != ?', 'ADMINISTRADOR', 'MASTER').order('name ASC').collect {|u| [u.name, u.id]}), include_blank: true) %>
+	  
+	  <strong>Bairro:</strong>
+	  <%= select_tag(:bairro_id, options_for_select(Bairro.order('nome ASC').collect {|b| [b.nome, b.id]}), include_blank: true) %>
+
+  <% end %>
+	
+	<%= submit_tag("Pesquisar") %>
+
+<% end %>
+
+<br/><br/>
+
+<div class="row">
+  <div class="col-lg-12">
+
+  	<h4>Lista de Imoveis <%= "do USUÁRIO: #{@usuario.name}" if @usuario != nil %> <%= "no BAIRRO: #{@bairro.nome}" if @bairro != nil %> | TOTAL (<%= @imoveis.count %>)</h4><br/>
+
+  	<table id="tabela" class="display" cellspacing="0" width="100%">
+		  <thead>
+		    <tr>
+		      <th>Proprietario</th>
+		      <th>Bairro</th>
+		      <th>Emplacado</th>
+		      <th>Usuário</th>
+		    </tr>
+		  </thead>
+
+		  <tbody>
+		    <% @imoveis.each do |i| %>
+		      <tr>
+		        <td><%= i.proprietario %></td>
+		        <td><%= detalhes2(i.bairro, :nome) %></td>
+		        <td><%= simnao(i.emplacado) %></td>
+		        <td><%= detalhes2(i.user, :name) %></td>
+		      </tr>
+		    <% end %>
+		  </tbody>
+		</table>      
+  </div>
+
+	<div class="col-lg-12">
+  	<% if @imoveis.count > 0 %>
+
+			<h4> Localização Aproximada no Mapa</h4><br/>
+			  <div>
+			    <div id="pony" style='min-width: 200px; min-height: 400px;'></div>
+			  </div>
+
+			  
+
+			  <script type="text/javascript">
+			  document.addEventListener("DOMContentLoaded", function(event) { 
+			  $(document).ready(function(){
+			    
+
+			    map = new GMaps({
+			      div: '#pony',
+			      lat: <%= @imoveis.first.latitude %>,
+			      lng: <%= @imoveis.first.longitude %>
+			    });
+
+			  <% @imoveis.each do |p| %>
+
+			    map.addMarker({
+			      lat: <%= p.latitude %>,
+			      lng: <%= p.longitude %>,
+			      click: function(e) {
+			        alert(
+			          "PROPRIETARIO: <%= p.proprietario %> \nENDEREÇO: <%= p.logradouro %>, <%= p.numero %>, <%= p.bairro.nome %>"
+			          );
+			      }
+			    });
+
+			  <% end %>
+
+
+			  infoWindow: {
+			    content: '<p>HTML Content</p>'
+			  }
+
+
+
+
+			  });
+			  });
+
+
+			  </script>
+
+		  <% end %>
+  </div>
+</div>
+
+		

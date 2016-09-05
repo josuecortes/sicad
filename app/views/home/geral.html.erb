@@ -1,0 +1,211 @@
+<% content_for :titulo do %>
+  <i class="fa fa-cog" aria-hidden="true"></i> Relatorio Geral
+<% end %>
+
+<br/>
+
+<h3> Geral </h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Usuarios</th>
+      <th>Pessoas</th>
+      <th>Imoveis</th>
+      <th>Veiculos</th>
+      <th>Reuniões</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><%= @usuarios.count %></td>
+      <td><%= @pessoas.count %></td>
+      <td><%= @imoveis.count %></td>
+      <td><%= @veiculos.count %></td>
+      <td><%= @reunioes.count %></td>
+    </tr>
+  </tbody>
+</table>   
+
+<hr/>
+<br/>
+
+<table class="table table-bordered">
+  <tr>
+    <th colspan="2">Usuarios</th>
+  </tr>
+  <tr>
+    <th>Total</th>
+    <td><%= @usuarios.count %></td>
+  </tr>
+</table>
+
+<table class="table table-bordered">
+  <tr>
+    <th colspan="2">Pessoas</th>
+  </tr>
+  <tr>
+    <th>Total</th>
+    <td><%= @pessoas.count %></td>
+  </tr>
+</table>
+
+<table class="table table-bordered">
+  <tr>
+    <th colspan="2">Imoveis</th>
+  </tr>
+  <tr>
+    <th>Emplacados</th>
+    <td><%= @imoveis.where('emplacado = ?', true).count %></td>
+  </tr>
+  <tr>
+    <th>Faltando Emplacar</th>
+    <td><%= @imoveis.where('emplacado = ?', false).count %></td>
+  </tr>
+  <tr>
+    <th>Total</th>
+    <td><%= @imoveis.count %></td>
+  </tr>
+</table>
+
+<hr/>
+<br/>
+
+<table class="table table-bordered">
+  <tr>
+    <th colspan="2">Veiculos</th>
+  </tr>
+  <tr>
+    <th>Adesivados</th>
+    <td><%= @veiculos.where('adesivado = ?', true).count %></td>
+  </tr>
+  <tr>
+    <th>Faltando Adesivar</th>
+    <td><%= @veiculos.where('adesivado = ?', false).count %></td>
+  </tr>
+  <tr>
+    <th>Total</th>
+    <td><%= @veiculos.count %></td>
+  </tr>
+</table>
+
+<hr/>
+<br/>
+
+<table class="table table-bordered">
+  <tr>
+    <th colspan="2">Reuniões</th>
+  </tr>
+  <tr>
+    <th>Concluidas</th>
+    <td><%= @reunioes_concluidas.count %></td>
+  </tr>
+  <tr>
+    <th>Proximas</th>
+    <td><%= @proximas_reunioes.count %></td>
+  </tr>
+  <tr>
+    <th>Total</th>
+    <td><%= @reunioes.count %></td>
+  </tr>
+</table>
+
+<br/>
+<hr/>
+
+<h3> Usuários (<%= @usuarios.count %>)</h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+
+  <tbody>
+	  <% @usuarios.each do |u| %>  
+	    <tr>
+	      <td><%= u.name %></td>
+	      <td><%= u.email %></td>
+	    </tr>
+	  <% end %>
+  </tbody>
+</table>     
+
+<hr/>
+
+<h3> Pessoas (<%= @pessoas.count %>)</h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Endereço</th>
+      <th>Responsavel</th>
+    </tr>
+  </thead>
+
+  <tbody>
+	  <% @pessoas.each do |p| %>  
+	    <tr>
+	      <td><%= p.nome %></td>
+	      <td><%= p.logradouro %>, <%= p.numero %>, <%= p.bairro.nome %></td>
+	      <td><%= p.user.name %></td>
+	    </tr>
+	  <% end %>
+  </tbody>
+</table>     
+
+<hr/>
+
+<h3> Imoveis (<%= @imoveis.count %>)</h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Endereço</th>
+      <th>Tipo</th>
+      <th>Emplacado</th>
+      <th>Responsavel</th>
+    </tr>
+  </thead>
+
+  <tbody>
+	  <% @imoveis.each do |i| %>  
+	    <tr>
+	      <td><%= i.logradouro %>, <%= i.numero %>, <%= i.bairro.nome %></td>
+        <td><%= i.tipo %></td>
+	      <td><%= simnao(i.emplacado) %></td>
+	      <td><%= i.user.name %></td>
+	    </tr>
+	  <% end %>
+  </tbody>
+</table>     
+
+<hr/>
+
+<h3> Veiculos (<%= @veiculos.count %>)</h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Placa</th>
+      <th>Tipo</th>
+      <th>Adesivado</th>
+      <th>Responsavel</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @veiculos.each do |v| %>  
+      <tr>
+        <td><%= v.placa %></td>
+        <td><%= v.tipo %></td>
+        <td><%= simnao(v.adesivado) %></td>
+        <td><%= v.user.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>     

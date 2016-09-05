@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= content_for?(:title) ? yield(:title) : "SICAD" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "SICAD - Sistema de Cadastro" %>">
-    <link rel="icon" href="/assets/sicad.png" type="image/x-icon" />
+    <%= favicon_link_tag 'sicad.png' %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= csrf_meta_tags %>
   </head>

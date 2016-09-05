@@ -67,6 +67,7 @@ class ImoveisController < ApplicationController
 
     def dados
       @tipos = ["PLACA","MURO","CAVALETE","COMITÊ"]
+      @simnao = [['NAO',false], ['SIM',true]]
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_imovel
@@ -75,6 +76,6 @@ class ImoveisController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def imovel_params
-      params.require(:imovel).permit(:tipo, :logradouro, :user_id, :numero, :bairro_id, :proprietario, :entidade_id)
+      params.require(:imovel).permit(:tipo, :logradouro, :user_id, :numero, :bairro_id, :proprietario, :entidade_id, :emplacado)
     end
 end

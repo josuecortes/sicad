@@ -17,6 +17,7 @@
       <th>Tipo</th>
       <th>Bairro</th>
       <th>Proprietário</th>
+      <th>Emplacado</th>
       <th>Ações</th>
     </tr>
   </thead>
@@ -27,6 +28,7 @@
         <td><%= detalhes(imovel.tipo) %></td>
         <td><%= detalhes2(imovel.bairro,:nome) %></td>
         <td><%= detalhes(imovel.proprietario) %></td>
+        <td><%= simnao(imovel.emplacado) %></td>
         <td>
           <%= link_to link_icone('detalhes'), imovel, :class => 'btn btn-default' %>
           <%= link_to link_icone('editar'), edit_imovel_path(imovel), :class => 'btn btn-primary' %>

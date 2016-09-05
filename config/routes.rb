@@ -2,10 +2,11 @@ Rails.application.routes.draw do
   resources :bairros
   resources :cidades
   get 'home/index'
-
   get 'home/nao_autorizado'
-
   get 'home/pessoas'
+  get 'home/imoveis'
+  get 'home/veiculos'
+  get 'home/geral'
 
   resources :agendas
   resources :veiculos

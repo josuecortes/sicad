@@ -9,19 +9,19 @@
         <%= f.input :nome %>
         
         <div class="row">
-          <div class="col-lg-8">
-            <%= f.input :nascimento %>
+          <div class="col-lg-6">
+            <%= f.input :nascimento, as: :string, :input_html=>{:class=>'data', :id=>'data', :value=>(@pessoa.nascimento.strftime("%d/%m/%Y") if @pessoa.nascimento != nil)} %>
           </div>
-          <div class="col-lg-4">
-            <%= f.input :sexo %>
+          <div class="col-lg-6">
+            <%= f.input :sexo, :collection=>['M','F'], :include_blank => false %>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-lg-7">
+          <div class="col-lg-6">
             <%= f.input :cpf, :input_html=>{:class=>'cpf', :id=>'cpf'} %>
           </div>
-          <div class="col-lg-5">
+          <div class="col-lg-6">
             <%= f.input :rg %>
           </div>
         </div>
@@ -71,7 +71,7 @@
         <% if current_user.tipo == "USUARIO" %>
           <%= f.input :user_id, as: :hidden, :input_html=>{:value=>current_user.id} %>
         <% elsif current_user != "MASTER" %>
-
+          <%= f.input :user_id,:label=>"Responsável",:collection=>User.da_entidade(current_user.entidade).order(:name).collect{|u|[u.name,u.id]} %>
         <% end %>
         
       </div>

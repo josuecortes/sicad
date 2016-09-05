@@ -17,6 +17,7 @@
       <th>Tipo</th>
       <th>Placa</th>
       <th>Proprietário</th>
+      <th>Adesivado</th>
       <th>Ações</th>
     </tr>
   </thead>
@@ -27,6 +28,7 @@
         <td><%= detalhes(veiculo.tipo) %></td>
         <td><%= detalhes(veiculo.placa) %></td>
         <td><%= detalhes(veiculo.proprietario) %></td>
+        <td><%= simnao(veiculo.adesivado) %></td>
         <td>
           <%= link_to link_icone('detalhes'), veiculo, :class => 'btn btn-default' %>
           <%= link_to link_icone('editar'), edit_veiculo_path(veiculo), :class => 'btn btn-primary' %>

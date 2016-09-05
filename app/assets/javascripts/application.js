@@ -34,7 +34,7 @@
 // require morris
 // require raphael.min 
 //= require gmaps/google
-//= require maps
+// require maps
 //= require markerclusterer
 //= require infobox_packed
 //= require gmaps

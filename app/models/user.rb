@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   validates_presence_of :tipo, :name, :email
   validates_presence_of :entidade_id, :if => :checar_tipo
   validates_presence_of :superior_id, :if => :checar_tipo2
+  attr_accessor :superior_nome
   
   def checar_tipo
   	if self.tipo == "MASTER"

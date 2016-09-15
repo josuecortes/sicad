@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   end
 
   resources :usuarios do
+    get :autocomplete_user_name,:on=>:collection
+    post :tipo_usuario,:on=>:collection
     get :redefinir_senha
   end
 

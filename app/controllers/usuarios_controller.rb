@@ -2,6 +2,7 @@
 class UsuariosController < ApplicationController
   before_filter :e_usuario
   load_and_authorize_resource :class=>"User", except: :create
+  autocomplete :user,:name
   
   def index
     @usuarios = User.accessible_by(current_ability).all
@@ -14,9 +15,31 @@ class UsuariosController < ApplicationController
     
   end
 
+  def tipo_usuario
+    @tipo = params[:tipo]
+    if @tipo
+      if @tipo=="LIDERANÇA"
+        @entidade = current_user.entidade
+        @superiores = @entidade.users.where(:tipo=>"COORDENADOR").collect{|u|[u.name,u.id]}
+        render :partial=>"superior"
+      elsif @tipo=="CADASTRO"
+        @entidade = current_user.entidade
+        @superiores = @entidade.users.where(:tipo=>"LIDERANÇA").collect{|u|[u.name,u.id]}
+        render :partial=>"superior"
+      elsif @tipo=="COORDENADOR" or @tipo=="DIGITADOR" or @tipo=="CONFIRMADOR"
+        @superior = current_user
+        render :partial=>"superior"
+      else
+        render :nothing=>true
+      end
+    else
+      render :nothing=>true
+    end
+  end
+
   def new
     @usuario = User.new
-    
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @usuario }
@@ -106,8 +129,8 @@ class UsuariosController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :cpf, :entidade_id, :superior_id, :tipo, :ativo, :mudar_senha, :email, :password, 
-                                 :password_confirmation, :sign_in_count, :current_sign_in_at, 
-                                 :last_sign_in_at, :current_sign_in_ip, :last_sign_in_ip)
+     :password_confirmation, :sign_in_count, :current_sign_in_at, 
+     :last_sign_in_at, :current_sign_in_ip, :last_sign_in_ip)
   end
 
   def e_usuario

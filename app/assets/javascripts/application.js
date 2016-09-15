@@ -34,7 +34,7 @@
 // require morris
 // require raphael.min 
 //= require gmaps/google
-//= require maps
+// require maps
 //= require markerclusterer
 //= require infobox_packed
 //= require gmaps
@@ -81,4 +81,13 @@ $('table.display').dataTable({
       "sSortDescending": ": Activar para ordenar la columna de manera descendente"
     }
   }
+});
+
+
+$("#user_tipo").change(function() {
+    // make a POST call and replace the content
+    var tipo = $('#user_tipo').val();
+    jQuery.post("/usuarios/tipo_usuario/?tipo=" + tipo, function(data){
+      $("#superior").html(data);   
+  });
 });

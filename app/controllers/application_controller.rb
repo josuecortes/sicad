@@ -16,14 +16,14 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update) do |user_params|
       user_params.permit(:tipo, :cpf, :superior_id, :name, :cpf, :entidade_id, :ativo, :mudar_senha, :email, :password, :password_confirmation,
                                                            :sign_in_count, :current_sign_in_at, :last_sign_in_at, :current_sign_in_ip,
-                                                           :current_password, :last_sign_in_ip)
+                                                           :current_password, :last_sign_in_ip,:superior_nome)
 
     end
 
     devise_parameter_sanitizer.permit(:sign_up) do |user_params|
       user_params.permit(:tipo, :cpf, :superior_id, :name, :cpf, :entidade_id, :ativo, :mudar_senha, :email, :password, :password_confirmation,
                                                            :sign_in_count, :current_sign_in_at, :last_sign_in_at, :current_sign_in_ip,
-                                                           :current_password, :last_sign_in_ip)
+                                                           :current_password, :last_sign_in_ip,:superior_nome)
 
     end
 

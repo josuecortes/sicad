@@ -82,3 +82,12 @@ $('table.display').dataTable({
     }
   }
 });
+
+
+$("#user_tipo").change(function() {
+    // make a POST call and replace the content
+    var tipo = $('#user_tipo').val();
+    jQuery.post("/usuarios/tipo_usuario/?tipo=" + tipo, function(data){
+      $("#superior").html(data);   
+  });
+});

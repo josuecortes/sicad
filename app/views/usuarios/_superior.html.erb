@@ -1,0 +1,10 @@
+ <div class="col-lg-4">
+   <%=simple_fields_for :user do |f|%>
+   <% if @superior%>
+   <%=f.input :superior_nome,:label=>"Superior",:disabled=>true,:input_html=>{:value=>@superior.name}%>
+   <%=f.input :superior_id,:as=>:hidden,:input_html=>{:value=>@superior.id}%>
+   <%else%>
+   <%= f.input :superior_id, :label=>"Superior", :collection=>@superiores, as: :select, :input_html => {:class=>"col-xs-2", :required=>true}  %>
+   <%end%>
+   <%end%>
+</div>  

@@ -8,7 +8,7 @@ Usuários
 </p>
 <% end %>
 
-<%= simple_form_for @usuario, :url=>usuarios_path do |f| %>
+<%= simple_form_for @usuario, :url=>usuario_path do |f| %>
 
 <div class="row">
 
@@ -36,23 +36,36 @@ Usuários
     <%= f.input :email %>
   </div>
   
+  <% if current_user.id != @usuario.id %>
 
-  <div class="col-lg-3">
-  <%if @usuario!=current_user%>
+  <div class="col-lg-2">
     <%if current_user.tipo=="ADMINISTRADOR"%>
-    <%=f.input :tipo,:collection=>(["DIGITADOR","CONFIRMADOR","CADASTRO"]+[@usuario.tipo]).uniq,:include_blank=>true%>
-    <%elsif current_user.tipo=="DIGITADOR" and current_user%>
-    <%=f.input :tipo,:collection=>(["COORDENADOR","LIDERANÇA","CADASTRO"]+[@usuario.tipo]).uniq,:include_blank=>true%>
+    <%=f.input :tipo,:collection=>["DIGITADOR","CONFIRMADOR","COORDENADOR","LIDERANCA","CADASTRO"],:include_blank=>true%>
+    <%elsif current_user.tipo=="DIGITADOR"%>
+    <%=f.input :tipo,:collection=>["COORDENADOR","LIDERANCA","CADASTRO"],:include_blank=>true%>
     <% elsif current_user.tipo=="MASTER"%>
-    <%=f.input :tipo,:collection=>(["MASTER","ADMINISTRADOR"]+[@usuario.tipo]).uniq,:include_blank=>true%>
-    <%end%>
-    <%else%>
-    <%=f.input :tipo,:collection=>[current_user.tipo],:include_blank=>false %>
+    <%=f.input :tipo,:collection=>["MASTER","ADMINISTRADOR"],:include_blank=>true%>
+    <% elsif current_user.tipo=="COORDENADOR"%>
+    <%=f.input :tipo,:collection=>["LIDERANCA","CADASTRO"],:include_blank=>true%>
+    <% elsif current_user.tipo=="LIDERANCA"%>
+    <%=f.input :tipo,:collection=>["CADASTRO"],:include_blank=>true%>
     <%end%>
   </div>
 
-   <div id="superior">
-   </div>
+
+  <div id="superior">
+   <div class="col-lg-4">
+     <% if @usuario.tipo!=nil and @superior.nil?%>
+     <%= f.input :superior_id, :label=>"Superior", :collection=>@superiores, as: :select, :input_html => {:class=>"col-xs-2", :required=>true}  %>
+     <%elsif @usuario.tipo!=nil and !@superior.nil?%>
+     <%=f.input :superior_nome,:label=>"Superior",:disabled=>true,:input_html=>{:value=>@superior.name}%>
+     <%=f.input :superior_id,:as=>:hidden,:input_html=>{:value=>@superior.id}%>
+     <%end%>
+   </div>  
+
+ </div>
+
+ <% end %>
 
 </div>  
 
@@ -63,6 +76,8 @@ Usuários
   <div class="col-lg-6">
     <% if current_user.tipo == "MASTER" %>
     <%= f.input :entidade_id, :label=>"Entidade", :collection=>Entidade.order('nome ASC').collect {|e| [e.nome, e.id]}, as: :select, :input_html => {:class=>"col-xs-2", :required=>true}  %>
+    <% else %>
+    <%= f.input :entidade_id, as: :hidden, :input_html=>{:value=>current_user.entidade_id} %>  
     <% end %>
   </div>
 
@@ -79,27 +94,25 @@ Usuários
   </div>
 
   <div class="col-lg-4">
-   <%= f.input :bairro_id, :collection=>current_user.entidade.cidade.bairros.order("nome ASC").collect {|b| [b.nome, b.id]}, as: :select %>
- </div>
+    <% if current_user.tipo != "MASTER" %> 
+    <%= f.input :bairro_id, :collection=>current_user.entidade.cidade.bairros.order("nome ASC").collect {|b| [b.nome, b.id]}, as: :select %>
+    <% else %>
+    <%= f.input :bairro_id, :collection=>Bairro.order("nome ASC").collect {|b| [b.nome, b.id]}, as: :select %>
+    <% end %>
+  </div>
+
 
 </div>
 
 
 <br/>
 
-<p class="text-danger">Atenção: A senha gerada sera: "12345678"</p>
-<p class="text-info">Apos o primeiro login o usuário sera redirecionado e solicitado a mudar sua senha.
 
-  <%= f.input :password, :as => :hidden, :input_html => {value: "12345678"} %>
-  <%= f.input :password_confirmation, :as => :hidden, :input_html => {value: "12345678"} %>
+<div class="form-actions">
+  <%= link_to 'Voltar', usuarios_path, :class=>'btn btn-default' %>
+  <%= f.button :submit, 'Salvar', :class=>'btn btn-primary' %>
+</div>
 
-  <br/>
+<br/>
 
-  <div class="form-actions">
-    <%= link_to 'Voltar', usuarios_path, :class=>'btn btn-default' %>
-    <%= f.button :submit, 'Salvar', :class=>'btn btn-primary' %>
-  </div>
-
-  <br/>
-
-  <% end %>
+<% end %>

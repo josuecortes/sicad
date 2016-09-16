@@ -18,11 +18,6 @@
 </p>
 
 <p>
-  <strong>CPF:</strong>
-  <%= @usuario.cpf %>
-</p>
-
-<p>
   <strong>Email:</strong>
   <%= @usuario.email %>
 </p>
@@ -49,3 +44,52 @@
 <%= link_to link_icone('novo'), new_usuario_path, :class=> 'btn btn-success', :title=>"Novo Usuário" %>
 
 <br/>
+
+<br/>
+
+<% if @usuario.tipo == "ADMINISTRADOR" or @usuario.tipo == "COORDENADOR" or @usuario.tipo == "LIDERANCA" or @usuario.tipo == "CADASTRO" %> 
+
+  <h4> Localização Aproximada no Mapa</h4><br/>
+  <div>
+    <div id="pony" style='min-width: 200px; min-height: 400px;'></div>
+  </div>
+
+
+
+  <script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function(event) { 
+  $(document).ready(function(){
+    
+
+    map = new GMaps({
+      div: '#pony',
+      lat: <%= @usuario.latitude %>,
+      lng: <%= @usuario.longitude %>
+    });
+
+    map.addMarker({
+      lat: <%= @usuario.latitude %>,
+      lng: <%= @usuario.longitude %>,
+      click: function(e) {
+        alert(
+          "NOME: <%= @usuario.name %> \nENDEREÇO: <%= @usuario.logradouro %>, <%= @usuario.numero %>, <%= @usuario.bairro.nome %> \nTIPO: <%= @usuario.tipo %>"
+          );
+      }
+    });
+
+
+  infoWindow: {
+    content: '<p>HTML Content</p>'
+  }
+
+
+
+
+  });
+  });
+
+
+  </script>
+
+<% end %>
+

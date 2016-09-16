@@ -18,13 +18,13 @@ class UsuariosController < ApplicationController
   def tipo_usuario
     @tipo = params[:tipo]
     if @tipo
-      if @tipo=="LIDERANÇA"
+      if @tipo=="LIDERANCA"
         @entidade = current_user.entidade
         @superiores = @entidade.users.where(:tipo=>"COORDENADOR").collect{|u|[u.name,u.id]}
         render :partial=>"superior"
       elsif @tipo=="CADASTRO"
         @entidade = current_user.entidade
-        @superiores = @entidade.users.where(:tipo=>"LIDERANÇA").collect{|u|[u.name,u.id]}
+        @superiores = @entidade.users.where(:tipo=>"LIDERANCA").collect{|u|[u.name,u.id]}
         render :partial=>"superior"
       elsif @tipo=="COORDENADOR" or @tipo=="DIGITADOR" or @tipo=="CONFIRMADOR"
         @superior = current_user
@@ -40,6 +40,21 @@ class UsuariosController < ApplicationController
   def new
     @usuario = User.new
 
+  
+      if current_user.tipo!="MASTER"
+      if @usuario.tipo
+        if @usuario.tipo=="LIDERANCA"
+          @entidade = current_user.entidade
+          @superiores = @entidade.users.where(:tipo=>"COORDENADOR").collect{|u|[u.name,u.id]}
+        elsif @usuario.tipo=="CADASTRO"
+          @entidade = current_user.entidade
+          @superiores = @entidade.users.where(:tipo=>"LIDERANCA").collect{|u|[u.name,u.id]}
+          
+        elsif @usuario.tipo=="COORDENADOR" or @usuario.tipo=="DIGITADOR" or @usuario.tipo=="CONFIRMADOR"
+          @superior = current_user.entidade.users.where(:tipo=>"ADMINISTRADOR").first
+        end
+      end
+    end
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @usuario }
@@ -54,6 +69,22 @@ class UsuariosController < ApplicationController
 
   def edit
     @usuario = User.accessible_by(current_ability).find(params[:id])
+
+     
+      if current_user.tipo!="MASTER"
+      if @usuario.tipo
+        if @usuario.tipo=="LIDERANCA"
+          @entidade = current_user.entidade
+          @superiores = @entidade.users.where(:tipo=>"COORDENADOR").collect{|u|[u.name,u.id]}
+        elsif @usuario.tipo=="CADASTRO"
+          @entidade = current_user.entidade
+          @superiores = @entidade.users.where(:tipo=>"LIDERANCA").collect{|u|[u.name,u.id]}
+          
+        elsif @usuario.tipo=="COORDENADOR" or @usuario.tipo=="DIGITADOR" or @usuario.tipo=="CONFIRMADOR"
+          @superior = current_user.entidade.users.where(:tipo=>"ADMINISTRADOR").first
+        end
+      end
+    end
     
   end
 
@@ -63,6 +94,21 @@ class UsuariosController < ApplicationController
     @usuario = User.new(user_params)
     @usuario.ativo = true
     @usuario.mudar_senha = true
+
+  
+      if current_user.tipo!="MASTER"
+      if @usuario.tipo
+        if @usuario.tipo=="LIDERANCA"
+          @entidade = current_user.entidade
+          @superiores = @entidade.users.where(:tipo=>"COORDENADOR").collect{|u|[u.name,u.id]}
+        elsif @usuario.tipo=="CADASTRO"
+          @entidade = current_user.entidade
+          @superiores = @entidade.users.where(:tipo=>"LIDERANCA").collect{|u|[u.name,u.id]}
+          elsif @usuario.tipo=="COORDENADOR" or @usuario.tipo=="DIGITADOR" or @usuario.tipo=="CONFIRMADOR"
+          @superior = current_user.entidade.users.where(:tipo=>"ADMINISTRADOR").first
+        end
+      end
+    end
 
     respond_to do |format|
       if @usuario.save
@@ -82,6 +128,22 @@ class UsuariosController < ApplicationController
   # PUT /usuario/1.json
   def update
     @usuario = User.find(params[:id])
+
+
+      if current_user.tipo!="MASTER"
+      if @usuario.tipo
+        if @usuario.tipo=="LIDERANCA"
+          @entidade = current_user.entidade
+          @superiores = @entidade.users.where(:tipo=>"COORDENADOR").collect{|u|[u.name,u.id]}
+        elsif @usuario.tipo=="CADASTRO"
+          @entidade = current_user.entidade
+          @superiores = @entidade.users.where(:tipo=>"LIDERANCA").collect{|u|[u.name,u.id]}
+          
+        elsif @usuario.tipo=="COORDENADOR" or @usuario.tipo=="DIGITADOR" or @usuario.tipo=="CONFIRMADOR"
+          @superior = current_user.entidade.users.where(:tipo=>"ADMINISTRADOR").first
+        end
+      end
+    end
 
     respond_to do |format|
       if @usuario.update_attributes(user_params)
@@ -130,7 +192,7 @@ class UsuariosController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :cpf, :entidade_id, :superior_id, :tipo, :ativo, :mudar_senha, :email, :password, 
      :password_confirmation, :sign_in_count, :current_sign_in_at, 
-     :last_sign_in_at, :current_sign_in_ip, :last_sign_in_ip)
+     :last_sign_in_at, :current_sign_in_ip, :last_sign_in_ip, :bairro_id, :logradouro, :numero, :contato, :nascimento, :sexo )
   end
 
   def e_usuario
